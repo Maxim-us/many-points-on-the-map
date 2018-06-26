@@ -54,7 +54,8 @@ class MXMPOTMAdminMain
 			// include bootstrap 4.1.1
 			if(
 				$_GET['page'] == 'mxmpotm-many-points-on-the-map' ||
-				$_GET['page'] == 'mxmpotm-many-points-on-the-map-add'
+				$_GET['page'] == 'mxmpotm-many-points-on-the-map-add' ||
+				$_GET['page'] == 'mxmpotm-many-points-on-the-map-edit'
 			) {
 
 				wp_enqueue_style( 'mxmpotm_bootstrap_4_1_1', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/bootstrap-4.1.1/css/bootstrap.min.css' );
@@ -81,28 +82,31 @@ class MXMPOTMAdminMain
 			// add map
 			add_submenu_page( 'mxmpotm-many-points-on-the-map', __( 'New Map', 'mxmpotm_map' ), __( 'New Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-add', array( $this, 'add_map' ) );
 
+			// edit map
+			add_submenu_page( NULL, __( 'Edit Map', 'mxmpotm_map' ), __( 'Edit Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-edit', array( $this, 'edit_map' ) );
+
 		}
 
 			public function admin_index()
 			{
 
-				$action = 'index.php';
-
-				if( $_GET['map'] !== NULL ) {
-
-					$action = 'one_map.php';
-
-				}
-				
 				// require index page
-				mxmpotm_require_template_admin( $action );
+				mxmpotm_require_template_admin( 'index.php' );
+
+			}
+
+			public function edit_map()
+			{
+
+				// require one_map page
+				mxmpotm_require_template_admin( 'one_map.php' );
 
 			}
 
 			public function add_map()
 			{
 				
-				// require index page
+				// require add_new_map page
 				mxmpotm_require_template_admin( 'add_new_map.php' );
 
 			}

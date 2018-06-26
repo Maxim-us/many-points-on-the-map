@@ -44,3 +44,87 @@
     font-weight: bold;
     padding: 4px 6px;
 }
+
+/*points*/
+.mxmpotm_point_wrap {
+    position: relative;
+    position: relative;
+    background: #f3f2f2;
+    padding: 35px 28px 3px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #0085ba;
+    overflow: hidden;
+    height: 82px;
+}
+.mx_number_of_point {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: #ffffff;
+    padding: 0px 4px;
+}
+.mxmpotm_point_wrap input,
+.mxmpotm_point_wrap textarea {
+    margin-bottom: 20px;
+}
+input.mx_new_point_region {
+    width: 353px;
+    float: left;
+    margin-right: 6px;
+    margin-bottom: 0;
+}
+button.mx-add_region {
+    border: none;
+    background: transparent;
+    padding: 5px 9px;
+    color: #ddd;
+    cursor: pointer;
+    display: none;
+}
+button.mx-add_point {
+    position: absolute;
+    bottom: 0px;
+    right: -32px;
+    border: 1px solid #ddd;
+    background: transparent;
+    padding: 5px 9px;
+    color: #ddd;
+    cursor: pointer;
+    display: none;
+}
+#mxmpotm_points_wrap .mxmpotm_point_wrap:last-child button.mx-add_point {
+    display: block;
+}
+button.mx-open_point_box {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: 1px solid #ddd;
+    background: transparent;
+    padding: 5px 9px;
+    color: #ddd;
+    cursor: pointer;
+}
+.mxmpotm_point_wrap_open {
+    height: auto;
+    overflow: visible;
+}
+.mxmpotm_point_wrap_open button.mx-open_point_box i {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+}
+button.mx-add_point:hover,
+button.mx-open_point_box:hover {
+    color: #0085ba;
+    border: 1px solid #0085ba;
+}
+button.mx-add_region:hover {
+    color: #0085ba;
+}
+.mxmpotm_point_area_wrap .form-group:last-child button.mx-add_region {
+    display: block;
+}
+.mx-block_wrap.is-invalid {
+    border-color: #dc3545;
+}

@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	    <tr>
 			<th scope="row"><?php echo $key; ?></th>
 			<td>
-				<a href="<?php echo get_admin_url(); ?>admin.php?page=mxmpotm-many-points-on-the-map&map=<?php echo $map->id; ?>">
+				<a href="<?php echo get_admin_url(); ?>admin.php?page=mxmpotm-many-points-on-the-map-edit&map=<?php echo $map->id; ?>">
 					<strong>
 						<?php echo $map->map_name; ?>
 					</strong>
