@@ -5,19 +5,19 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<h1><?php echo __( 'Create a new map', 'mxmpotm_map' ); ?></h1>
+<h1><?php echo __( 'Create a new map', 'mxmpotm-map' ); ?></h1>
 
 <div class="mx-block_wrap">
 
 	<form id="mxmpotm_map_create" class="mx-settings" method="post" action="">
 
 		<div class="form-group">
-			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map', 'mxmpotm_map' ); ?></label>
+			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map', 'mxmpotm-map' ); ?></label>
 			<input type="text" class="form-control" id="mx_name_of_the_map" name="mx_name_of_the_map" />	
 		</div>
 
 		<div class="form-group">
-			<label for="mx_desc_of_the_map"><?php echo __( 'Map description', 'mxmpotm_map' ); ?></label>
+			<label for="mx_desc_of_the_map"><?php echo __( 'Map description', 'mxmpotm-map' ); ?></label>
 			<textarea name="mx_desc_of_the_map" id="mx_desc_of_the_map"><?php //echo mxmpotm_select_row( $id ); ?></textarea>
 		</div>		
 

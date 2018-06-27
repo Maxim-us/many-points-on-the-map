@@ -46,6 +46,27 @@
 }
 
 /*points*/
+.mx-del_point {
+    display: block;
+    position: absolute;
+    right: 0px;
+    margin-top: 18px;
+    border: 1px solid #ddd;
+    color: #ddd;
+    background: transparent;
+    cursor: pointer; 
+}
+.mxmpotm_point_wrap_open .mx-del_point {
+    margin-top: 0;
+    bottom: 0;
+}
+.mx-del_point:hover {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+#mxmpotm_points_wrap .mxmpotm_point_wrap:last-child button.mx-del_point {
+    display: none;
+}
 .mxmpotm_point_wrap {
     position: relative;
     position: relative;
@@ -80,6 +101,13 @@ button.mx-add_region {
     color: #ddd;
     cursor: pointer;
     display: none;
+}
+button.mx-delete_region {
+    border: none;
+    background: transparent;
+    padding: 5px 9px;
+    color: #ddd;
+    cursor: pointer;
 }
 button.mx-add_point {
     position: absolute;
@@ -119,8 +147,12 @@ button.mx-open_point_box:hover {
     color: #0085ba;
     border: 1px solid #0085ba;
 }
-button.mx-add_region:hover {
+button.mx-add_region:hover,
+button.mx-delete_region:hover {
     color: #0085ba;
+}
+.mxmpotm_point_area_wrap .form-group:last-child button.mx-delete_region {
+    display: none;
 }
 .mxmpotm_point_area_wrap .form-group:last-child button.mx-add_region {
     display: block;

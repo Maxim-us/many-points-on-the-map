@@ -5,17 +5,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<h1><?php echo __( 'All maps', 'mxmpotm_map' ); ?></h1>
+<h1><?php echo __( 'All maps', 'mxmpotm-map' ); ?></h1>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">
-				<?php echo __( 'Name', 'mxmpotm_map' ); ?>
+				<?php echo __( 'Name', 'mxmpotm-map' ); ?>
 				
 				</th>
-			<th scope="col"><?php echo __( 'Shortcode', 'mxmpotm_map' ); ?></th>
+			<th scope="col"><?php echo __( 'Shortcode', 'mxmpotm-map' ); ?></th>
 		</tr>
 	</thead>
 
@@ -48,8 +48,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<tfoot>
 	<tr>
 	  <th scope="col">#</th>
-	  <th scope="col"><?php echo __( 'Name', 'mxmpotm_map' ); ?></th>
-	  <th scope="col"><?php echo __( 'Shortcode', 'mxmpotm_map' ); ?></th>
+	  <th scope="col"><?php echo __( 'Name', 'mxmpotm-map' ); ?></th>
+	  <th scope="col"><?php echo __( 'Shortcode', 'mxmpotm-map' ); ?></th>
 	</tr>
 	</tfoot>
 

@@ -69,7 +69,7 @@ class MXMPOTMAdminMain
 			wp_enqueue_style( 'mxmpotm_admin_style', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/css/style.css', array( 'mxmpotm_font_awesome' ), MXMPOTM_PLUGIN_VERSION, 'all' );
 
 			// include admin_script file
-			wp_enqueue_script( 'mxmpotm_admin_script', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, false );
+			wp_enqueue_script( 'mxmpotm_admin_script', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, true );
 
 		}
 

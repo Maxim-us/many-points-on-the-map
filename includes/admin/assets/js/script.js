@@ -72,18 +72,18 @@ jQuery( document ).ready( function( $ ) {
 	* point box
 	*/
 	// create a new box point
-	var pointBox = $( '.mxmpotm_point_wrap' );
+	var pointBox = $( '#mxmpotm_points_wrap_example' ).find( '.mxmpotm_point_wrap' );
 
-	// set the number of point
-	pointBox.find( '.mx_number_of_point_n' ).text( '1' );
-	pointBox.attr( 'data-id', 1 );
+	// create a new box area
+	var arerBox = $( '#mxmpotm_points_wrap_example' ).find( '.mxmpotm_point_area' );
 
-	// clear container
-	$( '#mxmpotm_points_wrap' ).empty();
+	// Add the first point if the block is empty
+	if( $( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).length === 0 ) {
 
-	// append the first point
-	$( pointBox ).clone().appendTo( '#mxmpotm_points_wrap' );
+		$( pointBox ).clone().appendTo( '#mxmpotm_points_wrap' );
 
+	}
+	
 	// event add points
 	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-add_point', function() {
 
@@ -102,12 +102,8 @@ jQuery( document ).ready( function( $ ) {
 
 			if( mxmpotm_check_empty_fields( $, arrayFields, $( '#mxmpotm_points_wrap' ) ) ) {
 
-				var count_items = $( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).length;
-
-				count_items++;
-
-				pointBox.find( '.mx_number_of_point_n' ).text( count_items );
-				pointBox.attr( 'data-id', count_items );
+				// set the number of point
+				mxmpotm_set_attr_for_poins( $, pointBox );	
 
 				$( pointBox ).clone().appendTo( '#mxmpotm_points_wrap' );
 
@@ -116,6 +112,23 @@ jQuery( document ).ready( function( $ ) {
 		},1000 );
 
 	} );
+
+	// delete point
+	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-del_point', function() {
+
+		if( confirm( confirmText ) ) {
+
+			$( this ).parent().css( 'opacity', 0.4 );
+
+			$( this ).parent().animate( { 'height': '15px' }, 500, function() {
+
+				$( this ).remove();
+
+			} );
+
+		}		
+
+	} );	
 
 	// open box
 	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-open_point_box', function( e ) {
@@ -163,11 +176,36 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
+	/***************
+	* Areas
+	*/
+	// event add ares
+	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-add_region', function() {
+
+		var areaParent = $( this ).parent().parent();
+
+		// check empty region inputs
+		if( mxmpotm_check_empty_areas( $, areaParent ) ) {
+
+			$( arerBox ).clone().appendTo( areaParent );
+
+		}
+
+	} );
+
+	// event delete region
+	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-delete_region', function() {
+
+		$( this ).parent().remove();
+
+	} );
+
 } );
 
 /*
 * functions
 */
+// check empty fields
 function mxmpotm_check_empty_fields( $, arrayFields, boxPoints ) {
 
 	var _return = true;
@@ -189,6 +227,52 @@ function mxmpotm_check_empty_fields( $, arrayFields, boxPoints ) {
 			element.removeClass( 'is-invalid' );
 
 			boxPoints.removeClass( 'is-invalid' );
+
+			_return = true;
+
+		}
+
+	} );
+
+	return _return;
+
+}
+
+// set attr for points
+function mxmpotm_set_attr_for_poins( $, pointBox ) {
+	
+	var data_id_last_point = parseInt( pointBox.attr( 'data-id' ) );
+
+	data_id_last_point++;
+
+	// set number
+	pointBox.find( '.mx_number_of_point_n' ).text( data_id_last_point );
+
+	// set data
+	pointBox.attr( 'data-id', data_id_last_point );
+
+}
+
+// check empty areas
+function mxmpotm_check_empty_areas( $, areaParent ) {
+
+	var _return = true;
+
+	var inputs = areaParent.find( '.mx_new_point_region' );
+
+	inputs.each( function() {
+
+		if( $( this ).val().length === 0 ) {
+
+			$( this ).addClass( 'is-invalid' );
+
+			_return = false;
+
+			return false;
+
+		} else {
+
+			$( this ).removeClass( 'is-invalid' );
 
 			_return = true;
 
