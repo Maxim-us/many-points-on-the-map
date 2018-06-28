@@ -80,7 +80,7 @@ class MXMPOTMAdminMain
 			add_menu_page( __( 'List of the maps', 'mxmpotm_map' ), __( 'Many points', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map', array( $this, 'admin_index' ), 'dashicons-image-filter', 111 ); // icons https://developer.wordpress.org/resource/dashicons/#id
 
 			// add map
-			add_submenu_page( 'mxmpotm-many-points-on-the-map', __( 'New Map', 'mxmpotm_map' ), __( 'New Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-add', array( $this, 'add_map' ) );
+			add_submenu_page( 'mxmpotm-many-points-on-the-map', __( 'Create a new map', 'mxmpotm_map' ), __( 'Create a new map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-add', array( $this, 'add_map' ) );
 
 			// edit map
 			add_submenu_page( NULL, __( 'Edit Map', 'mxmpotm_map' ), __( 'Edit Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-edit', array( $this, 'edit_map' ) );
@@ -99,7 +99,7 @@ class MXMPOTMAdminMain
 			{
 
 				// require one_map page
-				mxmpotm_require_template_admin( 'one_map.php' );
+				mxmpotm_require_template_admin( 'edit_map.php' );
 
 			}
 

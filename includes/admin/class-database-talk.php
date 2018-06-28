@@ -43,7 +43,7 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
 
 			// Update data
-			$this->add_new_map( $_POST['mapName'], $_POST['mapDesc'] );		
+			$this->add_new_map( $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'] );		
 
 		}
 
@@ -52,14 +52,26 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Add data
-		public function add_new_map( $map_name, $map_desc )
-		{
+		public function add_new_map( $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center )
+		{			
 
 			// name of the map
 			$map_name = esc_html( $map_name );
 
 			// desc of the map
 			$map_desc = esc_html( $map_desc );
+
+			// points
+			$obj_points = serialize( $obj_points );
+
+			// latitude of the map
+			$latitude_center = esc_html( $latitude_center );
+
+			// latitude of the map
+			$longitude_center = esc_html( $longitude_center );
+
+			// zoom of the map
+			$zoom_map_center = esc_html( $zoom_map_center );
 
 			global $wpdb;
 
@@ -68,12 +80,20 @@ class MXMPOTMDataBaseTalk
 			$wpdb->insert( 
 				$table_name, 
 				array( 
-					'map_name' => $map_name,
-					'map_desc' => $map_desc
+					'map_name' 				=> $map_name,
+					'map_desc' 				=> $map_desc,
+					'points'				=> $obj_points,
+					'latitude_map_center' 	=> $latitude_center,
+					'longitude_map_center'	=> $longitude_center,
+					'zoom_map_center'		=> $zoom_map_center
 				), 
 				array( 
 					'%s', 
-					'%s' 
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%d'
 				) 
 			);
 
