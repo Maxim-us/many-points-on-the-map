@@ -20,6 +20,11 @@ if( $map_rows == NULL ) {
 // get current page url
 $current_page_url = get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the-map&map=' . $map_id;
 
+// translate points data into array
+$unserialize_points = maybe_unserialize( $map_rows->points );
+
+var_dump( $unserialize_points );
+
 ?>
 
 <h1><?php echo __( 'Edit map', 'mxmpotm-map' ); ?></h1>
@@ -49,7 +54,77 @@ $current_page_url = get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the
 	<h2><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
 
 	<!-- Working block -->
-	<div class="mx-block_wrap" id="mxmpotm_points_wrap"></div>
+	<div class="mx-block_wrap" id="mxmpotm_points_wrap">
+		
+		<?php foreach( $unserialize_points as $point ) : ?>
+
+			<div class="mxmpotm_point_wrap" data-id="<?php echo $point['point_id']; ?>">
+
+				<div class="mx_number_of_point">
+					<span class="mx_number_of_point_s">#</span>
+					<span class="mx_number_of_point_n"><?php echo $point['point_id']; ?></span>
+				</div>
+
+				<button type="button" class="mx-open_point_box"><i class="fa fa-angle-down"></i></button>
+
+				<button type="button" class="mx-add_point" title="<?php echo __( 'Add a new point', 'mxmpotm-map' ); ?>"><i class="fa fa-plus"></i></button>
+
+				<button type="button" class="mx-del_point" title="<?php echo __( 'Delete point', 'mxmpotm-map' ); ?>"><i class="fa fa-trash"></i></button>
+					
+				<div class="form-group">
+
+					<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="<?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_name']; ?>" />
+
+					<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder="<?php echo __( 'Describe the point', 'mxmpotm-map' ); ?>"><?php echo $point['point_desc']; ?></textarea>
+
+					<div>
+						
+						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_latitude']; ?>" />
+
+						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_longitude']; ?>" />
+
+					</div>
+
+					<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required" placeholder="<?php echo __( 'Address', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_address']; ?>" />					
+
+					<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder="<?php echo __( 'Additional information', 'mxmpotm-map' ); ?>"><?php echo $point['point_additional']; ?></textarea>
+				
+					<!-- regions -->
+					<div class="mxmpotm_point_area_wrap">
+
+						<h6><?php echo __( 'Below you can add a list of regions that are related to this point.', 'mxmpotm-map' ); ?></h6>
+
+						<?php if( ! isset( $point['areas'] ) ) : ?>
+
+							<div class="form-group mxmpotm_point_area">
+								<input type="text" class="mx_new_point_region form-control" placeholder="Which region belongs to this point" /><button type="button" class="mx-add_region" title="<?php echo __( 'Add region', 'mxmpotm-map' ); ?>"><i class="fa fa-plus"></i></button>
+								<button type="button" class="mx-delete_region" title="<?php echo __( 'Delete region', 'mxmpotm-map' ); ?>"><i class="fa fa-trash"></i></button>
+								<div class="clearfix"></div>
+							</div>
+
+						<?php else : ?>
+						
+							<?php foreach( $point['areas'] as $area ) : ?>
+
+								<div class="form-group mxmpotm_point_area">
+									<input type="text" class="mx_new_point_region form-control" placeholder="Which region belongs to this point" value="<?php echo $area; ?>" /><button type="button" class="mx-add_region" title="<?php echo __( 'Add region', 'mxmpotm-map' ); ?>"><i class="fa fa-plus"></i></button>
+									<button type="button" class="mx-delete_region" title="<?php echo __( 'Delete region', 'mxmpotm-map' ); ?>"><i class="fa fa-trash"></i></button>
+									<div class="clearfix"></div>
+								</div>
+
+							<?php endforeach; ?>
+
+						<?php endif; ?>
+						
+					</div>					
+
+				</div>
+
+			</div>
+
+		<?php endforeach; ?>
+
+	</div>
 
 	<!-- This block is an example block structure. For JS -->
 	<div class="mx-block_wrap" id="mxmpotm_points_wrap_example" style="display: none;">
@@ -62,14 +137,14 @@ $current_page_url = get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the
 		<div class="form-group">
 
 			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_latitude_map_center" class="form-control" id="mx_latitude_map_center form-control" required />
+			<input type="text" name="mx_latitude_map_center" class="form-control" id="mx_latitude_map_center" value="<?php echo $map_rows->latitude_map_center; ?>" required />
 
 		</div>
 
 		<div class="form-group">
 			
 			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_longitude_map_center" class="form-control" id="mx_longitude_map_center form-control" required />
+			<input type="text" name="mx_longitude_map_center" class="form-control" id="mx_longitude_map_center" value="<?php echo $map_rows->longitude_map_center; ?>" required />
 
 		</div>
 

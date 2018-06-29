@@ -8,8 +8,11 @@ jQuery( document ).ready( function( $ ) {
 
 		e.preventDefault();
 
+		// action
+		var action = 'mxmpotm_add_map';
+
 		// get data and send it
-		mxmpotm_ajax_data( $, $( this ) );		
+		mxmpotm_ajax_data( $, $( this ), action );
 
 	} );
 
@@ -18,33 +21,11 @@ jQuery( document ).ready( function( $ ) {
 
 		e.preventDefault();
 
-		var nonce = $( this ).find( '#mxmpotm_wpnonce' ).val();
+		// action
+		var action = 'mxmpotm_update_map';
 
-		var mapName = $( '#mx_name_of_the_map' ).val();
-
-		var mapDesc = $( '#mx_desc_of_the_map' ).val();
-
-		var mapId =  $( '#mx_map_id' ).val();
-
-		var current_page_url = $( '#current_page_url' ).val();
-
-		var data = {
-
-			'action': 'mxmpotm_update_map',
-			'nonce': nonce,
-			'mapId': mapId,
-			'mapName': mapName,
-			'mapDesc': mapDesc
-
-		};
-
-		jQuery.post( ajaxurl, data, function( response ) {
-
-			window.location.href = current_page_url;
-
-			// console.log( response );
-
-		} );
+		// get data and send it
+		mxmpotm_ajax_data( $, $( this ), action );
 
 	} );
 
@@ -186,9 +167,19 @@ jQuery( document ).ready( function( $ ) {
 * functions
 */
 // get data from the form
-function mxmpotm_ajax_data( $, _this ) {
+function mxmpotm_ajax_data( $, _this, action ) {
 
 	// data vars
+	var id_map = null;
+
+	var id_map_val = $( '#mx_map_id' ).val();
+
+	if( id_map_val.length !== 0 ) {
+
+		id_map = parseInt( id_map_val );
+
+	}
+
 	var nonce 				= _this.find( '#mxmpotm_wpnonce' ).val();
 
 	var mapName 			= $( '#mx_name_of_the_map' ).val();
@@ -211,7 +202,7 @@ function mxmpotm_ajax_data( $, _this ) {
 	$( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).each( function(  index, element ) {
 
 		// push id into tmp obj
-		obj_point_tmp['point_id'] = $( this ).attr( 'data-id' );
+		obj_point_tmp['point_id'] = parseInt( $( this ).attr( 'data-id' ) );
 
 		// push name into tmp obj
 		obj_point_tmp['point_name'] = $( this ).find( '.mx_new_point_name' ).val();
@@ -256,26 +247,31 @@ function mxmpotm_ajax_data( $, _this ) {
 	} );
 
 	// set data
-	var data = {
+	setTimeout( function() {
 
-		'action'			: 	'mxmpotm_add_map',
-		'nonce'				: 	nonce,
-		'mapName'			: 	mapName,
-		'mapDesc'			: 	mapDesc,
-		'latitude_center'	: 	latitude_center,
-		'longitude_center'	: 	longitude_center,
-		'obj_points' 		: 	obj_points,
-		'zoom_map_center'	: 	zoom_map_center
+		var data = {
 
-	};
+			'action'			: 	action,
+			'nonce'				: 	nonce,
+			'id_map'			: 	id_map,
+			'mapName'			: 	mapName,
+			'mapDesc'			: 	mapDesc,
+			'latitude_center'	: 	latitude_center,
+			'longitude_center'	: 	longitude_center,
+			'obj_points' 		: 	obj_points,
+			'zoom_map_center'	: 	zoom_map_center
 
-	jQuery.post( ajaxurl, data, function( response ) {
+		};
 
-		// window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map';
+		jQuery.post( ajaxurl, data, function( response ) {
 
-		console.log( response );
+			window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
 
-	} );
+			// console.log( response );
+
+		} );
+
+	},1000 );
 
 }
 
@@ -315,7 +311,7 @@ function mxmpotm_check_empty_fields( $, arrayFields, boxPoints ) {
 // set attr for points
 function mxmpotm_set_attr_for_poins( $, pointBox ) {
 	
-	var data_id_last_point = parseInt( pointBox.attr( 'data-id' ) );
+	var data_id_last_point = parseInt( $( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).last().attr( 'data-id' ) );
 
 	data_id_last_point++;
 
@@ -356,4 +352,9 @@ function mxmpotm_check_empty_areas( $, areaParent ) {
 
 	return _return;
 
+}
+
+// check empty fields by class name
+function mxmpotm_check_empty_fields_by_class_name() {
+	// ...
 }

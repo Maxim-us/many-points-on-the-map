@@ -83,7 +83,7 @@ class MXMPOTMAdminMain
 			add_submenu_page( 'mxmpotm-many-points-on-the-map', __( 'Create a new map', 'mxmpotm_map' ), __( 'Create a new map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-add', array( $this, 'add_map' ) );
 
 			// edit map
-			add_submenu_page( NULL, __( 'Edit Map', 'mxmpotm_map' ), __( 'Edit Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-edit', array( $this, 'edit_map' ) );
+			add_submenu_page( 'NULL', __( 'Edit Map', 'mxmpotm_map' ), __( 'Edit Map', 'mxmpotm_map' ), 'manage_options', 'mxmpotm-many-points-on-the-map-edit', array( $this, 'edit_map' ) );
 
 		}
 

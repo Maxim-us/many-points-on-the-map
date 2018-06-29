@@ -22,7 +22,7 @@ function mxmpotm_select_row( $id ) {
 
 	$table_name = $wpdb->prefix . MXMPOTM_TABLE_SLUG;
 
-	$get_row_map = $wpdb->get_row( "SELECT map_name, map_desc, points FROM $table_name WHERE id = $id" );
+	$get_row_map = $wpdb->get_row( "SELECT map_name, map_desc, points, latitude_map_center, longitude_map_center, zoom_map_center FROM $table_name WHERE id = $id" );
 
 	return $get_row_map;
 
