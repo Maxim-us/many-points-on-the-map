@@ -51,6 +51,8 @@ class MXMPOTMAdminMain
 		public function mxmpotm_enqueue()
 		{
 
+			if( ! isset( $_GET['page'] ) ) return;
+
 			// include bootstrap 4.1.1
 			if(
 				$_GET['page'] == 'mxmpotm-many-points-on-the-map' ||

@@ -23,8 +23,6 @@ $current_page_url = get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the
 // translate points data into array
 $unserialize_points = maybe_unserialize( $map_rows->points );
 
-var_dump( $unserialize_points );
-
 ?>
 
 <h1><?php echo __( 'Edit map', 'mxmpotm-map' ); ?></h1>
@@ -150,7 +148,10 @@ var_dump( $unserialize_points );
 
 		<p class="mx-submit_button_wrap">
 			<input type="hidden" id="mxmpotm_wpnonce" name="mxmpotm_wpnonce" value="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" />
-			<input class="button-primary" type="submit" name="mxmpotm-submit" value="<?php echo __( 'Edit map', 'mxmpotm-map' ); ?>" />
+
+			<input class="btn btn-danger btn-sm float-left" type="button" name="mxmpotm_delete_map_btn" data-id-map="<?php echo $map_id; ?>" data-nonce="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" value="<?php echo __( 'Delete map', 'mxmpotm-map' ); ?>" id="mxmpotm_delete_map_btn" />
+
+			<input class="btn btn-success btn-sm" type="submit" name="mxmpotm-submit" value="<?php echo __( 'Edit map', 'mxmpotm-map' ); ?>" />
 		</p>
 
 	</div>
@@ -159,6 +160,8 @@ var_dump( $unserialize_points );
 
 <script>
 	// for JS
-	var confirmText = '<?php echo __( 'Delete point?', 'mxmpotm-map' ); ?>';
+	var confirmTextdelPoint = '<?php echo __( 'Delete point?', 'mxmpotm-map' ); ?>';
+
+	var confirmTextdelMap = '<?php echo __( 'Delete map?', 'mxmpotm-map' ); ?>';
 
 </script>

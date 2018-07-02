@@ -11,8 +11,18 @@ jQuery( document ).ready( function( $ ) {
 		// action
 		var action = 'mxmpotm_add_map';
 
-		// get data and send it
-		mxmpotm_ajax_data( $, $( this ), action );
+		// required fields
+		var requiredFields = $( '#mxmpotm_points_wrap' ).find( '.mx-is_required' );
+
+		// points wrap
+		var wrapPoints = $( '#mxmpotm_points_wrap' );
+
+		if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
+
+			// get data and send it
+			mxmpotm_ajax_data( $, $( this ), action );
+
+		}
 
 	} );
 
@@ -24,8 +34,30 @@ jQuery( document ).ready( function( $ ) {
 		// action
 		var action = 'mxmpotm_update_map';
 
-		// get data and send it
-		mxmpotm_ajax_data( $, $( this ), action );
+		// required fields
+		var requiredFields = $( '#mxmpotm_points_wrap' ).find( '.mx-is_required' );
+
+		// points wrap
+		var wrapPoints = $( '#mxmpotm_points_wrap' );
+
+		if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
+
+			// get data and send it
+			mxmpotm_ajax_data( $, $( this ), action );
+
+		}
+		
+	} );
+
+	// delete map
+	$( '#mxmpotm_delete_map_btn' ).on( 'click', function() {
+
+		var nonce = $( this ).attr( 'data-nonce' );
+
+		var id_map = $( this ).attr( 'data-id-map' );
+
+		// del map
+		mxmpotm_delete_map( $, nonce, id_map );
 
 	} );
 
@@ -48,20 +80,13 @@ jQuery( document ).ready( function( $ ) {
 	// event add points
 	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-add_point', function() {
 
-		var arrayFields = [];
+		var requiredFields = $( '#mxmpotm_points_wrap' ).find( '.mx-is_required' );		
 
-		$( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).each( function() {
-
-			arrayFields.push( $( this ).find( '.mx_new_point_name' ) );
-			arrayFields.push( $( this ).find( '.mx_new_point_latitude' ) );
-			arrayFields.push( $( this ).find( '.mx_new_point_longitude' ) );
-			arrayFields.push( $( this ).find( '.mx_new_point_address' ) );
-
-		} );
+		var wrapPoints = $( '#mxmpotm_points_wrap' );
 
 		setTimeout( function(){
 
-			if( mxmpotm_check_empty_fields( $, arrayFields, $( '#mxmpotm_points_wrap' ) ) ) {
+			if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
 
 				// set the number of point
 				mxmpotm_set_attr_for_poins( $, pointBox );	
@@ -77,7 +102,7 @@ jQuery( document ).ready( function( $ ) {
 	// delete point
 	$( '#mxmpotm_points_wrap' ).on( 'click', '.mx-del_point', function() {
 
-		if( confirm( confirmText ) ) {
+		if( confirm( confirmTextdelPoint ) ) {
 
 			$( this ).parent().css( 'opacity', 0.4 );
 
@@ -242,12 +267,12 @@ function mxmpotm_ajax_data( $, _this, action ) {
 		obj_point_tmp = {};
 
 		// clean tmp array
-		array_point_areas_tmp = [];		
+		array_point_areas_tmp = [];
 
 	} );
 
 	// set data
-	setTimeout( function() {
+	$( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).promise().done( function() {
 
 		var data = {
 
@@ -267,44 +292,76 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 			window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
 
-			// console.log( response );
+			// console.log( response + 'done' );
 
 		} );
 
-	},1000 );
+	} );		
+
+}
+
+// delete map
+function mxmpotm_delete_map( $, nonce, id_map ) {
+
+	var data = {
+
+		'action'			: 	'mxmpotm_del_map',
+		'nonce'				: 	nonce,
+		'id_map'			: 	id_map
+
+	};
+
+	if( confirm( confirmTextdelMap ) ) {
+
+		jQuery.post( ajaxurl, data, function( response ) {
+
+			window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map';
+
+		} );
+
+	}
 
 }
 
 // check empty fields
-function mxmpotm_check_empty_fields( $, arrayFields, boxPoints ) {
+function mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) {
 
-	var _return = true;
+	var arrayBolleans = [];
 
-	$.each( arrayFields, function( index, element ){
+	requiredFields.each( function(){
 
-		if( element.val().length === 0 ) {
+		if( $( this ).val().length === 0 ) {
 
-			element.addClass( 'is-invalid' );
+			$( this ).addClass( 'is-invalid' );
 
-			boxPoints.addClass( 'is-invalid' );
+			arrayBolleans.push( 'false' );
 
-			_return = false;
-
-			return false;
+			// find parents
+			mxmpotm_find_parent_by_className( $, $( this ), 'mxmpotm_point_wrap' );
 
 		} else {
 
-			element.removeClass( 'is-invalid' );
+			$( this ).removeClass( 'is-invalid' );			
 
-			boxPoints.removeClass( 'is-invalid' );
+			arrayBolleans.push( 'true' );
 
-			_return = true;
-
-		}
+		}		
 
 	} );
 
-	return _return;
+	if( $.inArray( 'false', arrayBolleans ) === -1 ) {
+
+		wrapPoints.removeClass( 'is-invalid' );
+
+		return true;
+
+	} else {
+
+		wrapPoints.addClass( 'is-invalid' );
+
+		return false;
+
+	}
 
 }
 
@@ -354,7 +411,35 @@ function mxmpotm_check_empty_areas( $, areaParent ) {
 
 }
 
-// check empty fields by class name
-function mxmpotm_check_empty_fields_by_class_name() {
-	// ...
+// find parent by className
+function mxmpotm_find_parent_by_className( $, element, findParent ) {
+
+	var allParents = element.parents();
+
+	allParents.map( function( i, el ) {
+
+		if( this.className.indexOf( findParent ) > -1 ) {
+
+			var parentDataId = parseInt( this.dataset.id );
+
+			$( '.' + findParent ).each( function() {
+
+				var getDataId = parseInt( $( this ).attr( 'data-id' ) );
+
+				if( getDataId === parentDataId ) {
+
+					$( this ).addClass( 'mxmpotm_point_wrap_open' );
+
+					$( this ).attr( 'style', '' );
+
+				}
+
+			} );
+
+
+		}		
+
+	} );
+	
+
 }

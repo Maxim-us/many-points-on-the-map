@@ -5,17 +5,27 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<h1><?php echo __( 'All maps', 'mxmpotm-map' ); ?></h1>
+<div class="container-fluid">
+	
+	<div class="row">
+		<div class="col-12">
+
+			<h1 class="float-left text-secondary"><?php echo __( 'All maps', 'mxmpotm-map' ); ?></h1>
+
+			<a href="admin.php?page=mxmpotm-many-points-on-the-map-add" class="btn btn-primary float-right"><?php echo __( 'Create map', 'mxmpotm-map' ); ?></a>
+			
+		</div>
+	</div>
+</div>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th scope="col">#</th>
-			<th scope="col">
-				<?php echo __( 'Name', 'mxmpotm-map' ); ?>
-				
-				</th>
+			<th scope="col"><?php echo __( 'Name', 'mxmpotm-map' ); ?></th>
+			<th scope="col"><?php echo __( 'Description', 'mxmpotm-map' ); ?></th>
 			<th scope="col"><?php echo __( 'Shortcode', 'mxmpotm-map' ); ?></th>
+			<th scope="col"><?php echo __( 'Action', 'mxmpotm-map' ); ?></th>
 		</tr>
 	</thead>
 
@@ -37,7 +47,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					</strong>
 				</a>
 			</td>
-			<td><span class="mx-shortcode">[many_points_map="<?php echo $map->id; ?>"]</span></td>
+			<td><p><?php echo $map->map_desc; ?></p></td>
+			<td scope="row"><span class="mx-shortcode">[many_points_map="<?php echo $map->id; ?>"]</span></td>
+			<td><span class="mx-del-map">
+				<button type="button" data-id-map="<?php echo $map->id; ?>" data-nonce="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" class="btn btn-danger" id="mxmpotm_delete_map_btn"><i class="fa fa-trash"></i></button>
+			</span></td>
 	    </tr>
 
 	<?php endforeach; ?>
@@ -49,8 +63,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<tr>
 	  <th scope="col">#</th>
 	  <th scope="col"><?php echo __( 'Name', 'mxmpotm-map' ); ?></th>
+	  <th scope="col"><?php echo __( 'Description', 'mxmpotm-map' ); ?></th>
 	  <th scope="col"><?php echo __( 'Shortcode', 'mxmpotm-map' ); ?></th>
+	  <th scope="col"><?php echo __( 'Action', 'mxmpotm-map' ); ?></th>
 	</tr>
 	</tfoot>
 
 </table>
+
+<script>
+
+	// for JS
+	var confirmTextdelMap = '<?php echo __( 'Delete map?', 'mxmpotm-map' ); ?>';
+
+</script>

@@ -26,7 +26,7 @@ class MXMPOTMBasisPluginClass
 			$sql = "CREATE TABLE IF NOT EXISTS `$table_name`
 			(
 				`id` int(11) NOT NULL AUTO_INCREMENT,
-				`map_name` varchar(40) NOT NULL,
+				`map_name` text NOT NULL,
 				`map_desc` text DEFAULT '' NOT NULL,
 				`points` longtext NOT NULL,
 				`latitude_map_center` varchar(15) NOT NULL,

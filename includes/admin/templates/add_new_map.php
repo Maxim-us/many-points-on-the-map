@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<h1><?php echo __( 'Create a new map', 'mxmpotm-map' ); ?></h1>
+<h1 class="text-secondary"><?php echo __( 'Create a new map', 'mxmpotm-map' ); ?></h1>
 
 <form id="mxmpotm_map_create" class="mx-settings" method="post" action="">
 
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	<!-- area of creating a new points  -->
 	<br>
-	<h2><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
+	<h2 class="text-secondary"><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
 
 	<!-- Working block -->
 	<div class="mx-block_wrap" id="mxmpotm_points_wrap"></div>

@@ -28,6 +28,9 @@ class MXMPOTMDataBaseTalk
 		// update map
 		add_action( 'wp_ajax_mxmpotm_update_map', array( $this, 'prepare_update_map' ) );
 
+		// delete map
+		add_action( 'wp_ajax_mxmpotm_del_map', array( $this, 'prepare_del_map' ) );
+
 	}
 
 	/*
@@ -112,7 +115,7 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
 
 			// Update map
-			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'] );	
+			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'] );
 
 		}
 
@@ -165,6 +168,45 @@ class MXMPOTMDataBaseTalk
 					'%s',
 					'%d'
 				) 
+			);
+
+		}
+
+	/*
+	* Prepare to map delete
+	*/
+	public function prepare_del_map()
+	{
+
+		// Checked POST nonce is not empty
+		if( empty( $_POST['nonce'] ) ) wp_die( '0' );
+
+		// Checked or nonce match
+		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
+
+			// Delete map
+			$this->delete_map( $_POST['id_map'] );	
+
+		}
+
+		wp_die();
+
+	}
+
+		// delete map
+		public function delete_map( $id_map )
+		{
+
+			global $wpdb;
+
+			$table_name = $wpdb->prefix . MXMPOTM_TABLE_SLUG;
+
+			$wpdb->delete(
+
+				$table_name,
+				array( 'id' => $id_map ),
+				array( '%d' )
+
 			);
 
 		}
