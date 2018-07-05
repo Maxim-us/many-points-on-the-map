@@ -58,12 +58,15 @@
 .mxmpotm_point_wrap_open .mx-del_point {
     margin-top: 0;
     bottom: 0;
+    width: 35px;
+    height: 35px;
+    right: 4px;
 }
 .mx-del_point:hover {
     color: #dc3545;
     border: 1px solid #dc3545;
 }
-#mxmpotm_points_wrap .mxmpotm_point_wrap:last-child button.mx-del_point {
+#mxmpotm_points_wrap .mxmpotm_point_wrap.mxmpotm_hide_del_point button.mx-del_point {
     display: none;
 }
 .mxmpotm_point_wrap {

@@ -77,8 +77,10 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 					<div>
 						
+						<small class="form-text text-muted"><?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?></small>
 						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_latitude']; ?>" />
 
+						<small class="form-text text-muted"><?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?></small>
 						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_longitude']; ?>" />
 
 					</div>
@@ -92,7 +94,7 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 						<h6><?php echo __( 'Below you can add a list of regions that are related to this point.', 'mxmpotm-map' ); ?></h6>
 
-						<?php if( ! isset( $point['areas'] ) ) : ?>
+						<?php if( ! isset( $point['areas'] ) or count( $point['areas'] ) == 0 ) : ?>
 
 							<div class="form-group mxmpotm_point_area">
 								<input type="text" class="mx_new_point_region form-control" placeholder="Which region belongs to this point" /><button type="button" class="mx-add_region" title="<?php echo __( 'Add region', 'mxmpotm-map' ); ?>"><i class="fa fa-plus"></i></button>
@@ -135,14 +137,14 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 		<div class="form-group">
 
 			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_latitude_map_center" class="form-control" id="mx_latitude_map_center" value="<?php echo $map_rows->latitude_map_center; ?>" required />
+			<input type="text" name="mx_latitude_map_center" class="form-control mx-is_coordinates" id="mx_latitude_map_center" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->latitude_map_center; ?>" required />
 
 		</div>
 
 		<div class="form-group">
 			
 			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_longitude_map_center" class="form-control" id="mx_longitude_map_center" value="<?php echo $map_rows->longitude_map_center; ?>" required />
+			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" id="mx_longitude_map_center" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->longitude_map_center; ?>" required />
 
 		</div>
 

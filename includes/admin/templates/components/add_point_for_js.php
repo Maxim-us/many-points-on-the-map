@@ -20,9 +20,13 @@
 
 		<div>
 			
-			<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" />
+			<small class="form-text text-muted"><?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?></small>
+			<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" />
+			
 
-			<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" />
+			<small class="form-text text-muted"><?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?></small>
+			<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" />
+			
 
 		</div>
 

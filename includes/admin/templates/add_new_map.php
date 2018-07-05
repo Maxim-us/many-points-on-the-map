@@ -45,14 +45,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<div class="form-group">
 
 			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_latitude_map_center form-control" class="form-control" id="mx_latitude_map_center" required />
+			<input type="text" name="mx_latitude_map_center form-control" class="form-control mx-is_coordinates" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" id="mx_latitude_map_center" required />
 
 		</div>
 
 		<div class="form-group">
 			
 			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_longitude_map_center" class="form-control form-control" id="mx_longitude_map_center" required />
+			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" id="mx_longitude_map_center" required />
 
 		</div>			
 

@@ -1,5 +1,8 @@
 jQuery( document ).ready( function( $ ) {
 
+	// button delete point
+	check_count_points_and_hidden_del_button( $ );
+
 	/*************
 	* AJAX
 	*/
@@ -17,7 +20,10 @@ jQuery( document ).ready( function( $ ) {
 		// points wrap
 		var wrapPoints = $( '#mxmpotm_points_wrap' );
 
-		if( mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) ) {
+		if(
+			mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) &&
+			mxmpotm_is_coordinates_fields( $, $( '.mx-is_coordinates' ) )
+		) {
 
 			// get data and send it
 			mxmpotm_ajax_data( $, $( this ), action );
@@ -40,7 +46,10 @@ jQuery( document ).ready( function( $ ) {
 		// points wrap
 		var wrapPoints = $( '#mxmpotm_points_wrap' );
 
-		if( mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) ) {
+		if(
+			mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) &&
+			mxmpotm_is_coordinates_fields( $, $( '.mx-is_coordinates' ) )
+		) {
 
 			// get data and send it
 			mxmpotm_ajax_data( $, $( this ), action );
@@ -57,7 +66,7 @@ jQuery( document ).ready( function( $ ) {
 		var id_map = $( this ).attr( 'data-id-map' );
 
 		// del map
-		mxmpotm_delete_map( $, nonce, id_map );
+		mxmpotm_delete_map( $, nonce, id_map );		
 
 	} );
 
@@ -95,7 +104,10 @@ jQuery( document ).ready( function( $ ) {
 
 			}
 
-		},1000 );
+			// chech count point
+			check_count_points_and_hidden_del_button( $ );
+
+		},500 );
 
 	} );
 
@@ -111,6 +123,9 @@ jQuery( document ).ready( function( $ ) {
 				$( this ).remove();
 
 			} );
+
+			// chech count point
+			check_count_points_and_hidden_del_button( $ );
 
 		}		
 
@@ -476,6 +491,41 @@ function mxmpotm_find_parent_by_className( $, element, findParent ) {
 
 }
 
+// is coordinates fields
+function mxmpotm_is_coordinates_fields( $, element ) {
+
+	var arrayBolleans = [];
+
+	element.each( function() {
+
+		if( mxmpotm_is_coordinates( $, $( this ).val() ) ) {
+
+			$( this ).removeClass( 'is-invalid' );
+
+			arrayBolleans.push( 'true' );
+
+		} else {
+
+			$( this ).addClass( 'is-invalid' );
+
+			arrayBolleans.push( 'false' );
+
+		}
+
+	} );
+
+	if( $.inArray( 'false', arrayBolleans ) === -1 ) {
+
+		return true;
+
+	} else {
+
+		return false;
+
+	}
+
+}
+
 // is coordinates
 function mxmpotm_is_coordinates( $, $value ) {
 
@@ -486,5 +536,26 @@ function mxmpotm_is_coordinates( $, $value ) {
 	}
 
 	return true;
+
+}
+
+// button delete point hidden
+function check_count_points_and_hidden_del_button( $ ) {
+
+	setTimeout( function() {
+
+		var countPoints = $( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).length;
+
+		if( countPoints === 1 ) {
+
+			$( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).addClass( 'mxmpotm_hide_del_point' );
+		
+		} else {
+
+			$( '#mxmpotm_points_wrap' ).find( '.mxmpotm_point_wrap' ).removeClass( 'mxmpotm_hide_del_point' );
+
+		}
+
+	},1000 );	
 
 }
