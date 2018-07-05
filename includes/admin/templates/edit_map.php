@@ -77,9 +77,9 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 					<div>
 						
-						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_latitude']; ?>" />
+						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_latitude']; ?>" />
 
-						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_longitude']; ?>" />
+						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_longitude']; ?>" />
 
 					</div>
 
@@ -158,10 +158,5 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 </form>
 
-<script>
-	// for JS
-	var confirmTextdelPoint = '<?php echo __( 'Delete point?', 'mxmpotm-map' ); ?>';
-
-	var confirmTextdelMap = '<?php echo __( 'Delete map?', 'mxmpotm-map' ); ?>';
-
-</script>
+<!-- Variables for javascript with translation functions -->
+<?php include( 'components/js_vars.php' ); ?>

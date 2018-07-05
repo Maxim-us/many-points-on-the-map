@@ -59,22 +59,81 @@ class MXMPOTMDataBaseTalk
 		{
 
 			// name of the map
-			$map_name = esc_html( $map_name );
+			$map_name = sanitize_text_field( $map_name );
 
 			// desc of the map
-			$map_desc = esc_html( $map_desc );
+			$map_desc = sanitize_text_field( $map_desc );
 
 			// points
-			$obj_points = serialize( $obj_points );
+			$sanitize_points = array();
+
+			foreach( $obj_points as $key => $value ) {
+
+				$tmp_array = array();
+
+				// point_id
+				$point_id = intval( $value['point_id'] );
+
+					$tmp_array['point_id'] = $point_id;
+
+				// point_name
+				$point_name = sanitize_text_field( $value['point_name'] );
+
+					$tmp_array['point_name'] = $point_name;
+
+				// point_desc
+				$point_desc = sanitize_text_field( $value['point_desc'] );
+
+					$tmp_array['point_desc'] = $point_desc;
+
+				// point_desc
+				$point_latitude = sanitize_text_field( $value['point_latitude'] );
+
+					$tmp_array['point_latitude'] = $point_latitude;
+
+				// point_desc
+				$point_longitude = sanitize_text_field( $value['point_longitude'] );
+
+					$tmp_array['point_longitude'] = $point_longitude;
+
+				// point_desc
+				$point_address = sanitize_text_field( $value['point_address'] );
+
+					$tmp_array['point_address'] = $point_address;
+
+				// point_desc
+				$point_additional = sanitize_text_field( $value['point_additional'] );
+
+					$tmp_array['point_additional'] = $point_additional;
+
+					// areas
+					$tmp_all_areas = array();
+
+					foreach ( $value['areas'] as $key => $value ) {
+						
+						// point_desc
+						$area = sanitize_text_field( $value );
+
+							$push_area = array_push( $tmp_all_areas, $area );
+
+					}
+
+					$tmp_array['areas'] = $tmp_all_areas;
+
+					$push_to_main_array = array_push( $sanitize_points, $tmp_array );
+
+			}
+
+			$obj_points = serialize( $sanitize_points );
 
 			// latitude of the map
-			$latitude_center = esc_html( $latitude_center );
+			$latitude_center = sanitize_text_field( $latitude_center );
 
 			// latitude of the map
-			$longitude_center = esc_html( $longitude_center );
+			$longitude_center = sanitize_text_field( $longitude_center );
 
 			// zoom of the map
-			$zoom_map_center = esc_html( $zoom_map_center );
+			$zoom_map_center = sanitize_text_field( $zoom_map_center );
 
 			global $wpdb;
 
@@ -128,22 +187,81 @@ class MXMPOTMDataBaseTalk
 		{
 
 			// name of the map
-			$map_name = esc_html( $map_name );
+			$map_name = sanitize_text_field( $map_name );
 
 			// desc of the map
-			$map_desc = esc_html( $map_desc );
+			$map_desc = sanitize_text_field( $map_desc );
 
 			// points
-			$obj_points = serialize( $obj_points );
+			$sanitize_points = array();
+
+			foreach( $obj_points as $key => $value ) {
+
+				$tmp_array = array();
+
+				// point_id
+				$point_id = intval( $value['point_id'] );
+
+					$tmp_array['point_id'] = $point_id;
+
+				// point_name
+				$point_name = sanitize_text_field( $value['point_name'] );
+
+					$tmp_array['point_name'] = $point_name;
+
+				// point_desc
+				$point_desc = sanitize_text_field( $value['point_desc'] );
+
+					$tmp_array['point_desc'] = $point_desc;
+
+				// point_desc
+				$point_latitude = sanitize_text_field( $value['point_latitude'] );
+
+					$tmp_array['point_latitude'] = $point_latitude;
+
+				// point_desc
+				$point_longitude = sanitize_text_field( $value['point_longitude'] );
+
+					$tmp_array['point_longitude'] = $point_longitude;
+
+				// point_desc
+				$point_address = sanitize_text_field( $value['point_address'] );
+
+					$tmp_array['point_address'] = $point_address;
+
+				// point_desc
+				$point_additional = sanitize_text_field( $value['point_additional'] );
+
+					$tmp_array['point_additional'] = $point_additional;
+
+					// areas
+					$tmp_all_areas = array();
+
+					foreach ( $value['areas'] as $key => $value ) {
+						
+						// point_desc
+						$area = sanitize_text_field( $value );
+
+							$push_area = array_push( $tmp_all_areas, $area );
+
+					}
+
+					$tmp_array['areas'] = $tmp_all_areas;
+
+					$push_to_main_array = array_push( $sanitize_points, $tmp_array );
+
+			}
+
+			$obj_points = serialize( $sanitize_points );
 
 			// latitude of the map
-			$latitude_center = esc_html( $latitude_center );
+			$latitude_center = sanitize_text_field( $latitude_center );
 
 			// latitude of the map
-			$longitude_center = esc_html( $longitude_center );
+			$longitude_center = sanitize_text_field( $longitude_center );
 
 			// zoom of the map
-			$zoom_map_center = esc_html( $zoom_map_center );
+			$zoom_map_center = sanitize_text_field( $zoom_map_center );
 
 			global $wpdb;
 

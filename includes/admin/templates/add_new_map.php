@@ -65,9 +65,5 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 </form>
 
-
-<script>
-	// for JS
-	var confirmText = '<?php echo __( 'Delete point?', 'mxmpotm-map' ); ?>';
-
-</script>
+<!-- Variables for javascript with translation functions -->
+<?php include( 'components/js_vars.php' ); ?>

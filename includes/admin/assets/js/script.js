@@ -17,7 +17,7 @@ jQuery( document ).ready( function( $ ) {
 		// points wrap
 		var wrapPoints = $( '#mxmpotm_points_wrap' );
 
-		if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
+		if( mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) ) {
 
 			// get data and send it
 			mxmpotm_ajax_data( $, $( this ), action );
@@ -40,7 +40,7 @@ jQuery( document ).ready( function( $ ) {
 		// points wrap
 		var wrapPoints = $( '#mxmpotm_points_wrap' );
 
-		if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
+		if( mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) ) {
 
 			// get data and send it
 			mxmpotm_ajax_data( $, $( this ), action );
@@ -86,7 +86,7 @@ jQuery( document ).ready( function( $ ) {
 
 		setTimeout( function(){
 
-			if( mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) ) {
+			if( mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) ) {
 
 				// set the number of point
 				mxmpotm_set_attr_for_poins( $, pointBox );	
@@ -288,12 +288,21 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 		};
 
-		jQuery.post( ajaxurl, data, function( response ) {
+		jQuery.post( ajaxurl, data, function( response ) {	
 
-			window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
+			if( response === '' ) {
 
-			// console.log( response + 'done' );
+				alert( dataSavedText );
 
+				window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
+
+			} else {
+
+				alert( dataNotSavedText );
+
+			}
+
+			
 		} );
 
 	} );		
@@ -324,7 +333,7 @@ function mxmpotm_delete_map( $, nonce, id_map ) {
 }
 
 // check empty fields
-function mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) {
+function mxmpotm_check_invalid_point_fields( $, requiredFields, wrapPoints ) {
 
 	var arrayBolleans = [];
 
@@ -336,14 +345,38 @@ function mxmpotm_check_empty_point_fields( $, requiredFields, wrapPoints ) {
 
 			arrayBolleans.push( 'false' );
 
-			// find parents
+			// find parents and open it
 			mxmpotm_find_parent_by_className( $, $( this ), 'mxmpotm_point_wrap' );
 
 		} else {
 
-			$( this ).removeClass( 'is-invalid' );			
+			// check coordinates
+			if( $( this ).hasClass( 'mx-is_coordinates' ) ) {		
 
-			arrayBolleans.push( 'true' );
+				if( mxmpotm_is_coordinates( $, $( this ).val() ) ) {
+
+					$( this ).removeClass( 'is-invalid' );
+
+					arrayBolleans.push( 'true' );
+
+				} else {
+
+					$( this ).addClass( 'is-invalid' );
+
+					arrayBolleans.push( 'false' );
+
+					// find parents and open it
+					mxmpotm_find_parent_by_className( $, $( this ), 'mxmpotm_point_wrap' );
+
+				}
+
+			} else {
+
+				$( this ).removeClass( 'is-invalid' );
+
+				arrayBolleans.push( 'true' );
+
+			}			
 
 		}		
 
@@ -439,7 +472,19 @@ function mxmpotm_find_parent_by_className( $, element, findParent ) {
 
 		}		
 
-	} );
-	
+	} );	
+
+}
+
+// is coordinates
+function mxmpotm_is_coordinates( $, $value ) {
+
+	if( isNaN( $value ) ) {
+
+		return false;
+
+	}
+
+	return true;
 
 }

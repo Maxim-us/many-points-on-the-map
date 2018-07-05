@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				</a>
 			</td>
 			<td><p><?php echo $map->map_desc; ?></p></td>
-			<td scope="row"><span class="mx-shortcode">[many_points_map="<?php echo $map->id; ?>"]</span></td>
+			<td><span class="mx-shortcode">[many_points_map id="<?php echo $map->id; ?>"]</span></td>
 			<td><span class="mx-del-map">
 				<button type="button" data-id-map="<?php echo $map->id; ?>" data-nonce="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" class="btn btn-danger" id="mxmpotm_delete_map_btn"><i class="fa fa-trash"></i></button>
 			</span></td>

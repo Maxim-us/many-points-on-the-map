@@ -40,3 +40,98 @@ function mxmpotm_select_rows() {
 	return $get_all_rows_map;
 
 }
+
+/*
+* Shortcodes
+*/
+function mxmpotm_show_many_points_map( $args ) {
+
+	// if isset id of the map
+	if( ! isset( $args['id'] ) ) return;
+
+	// save this id
+	$id_map = $args['id'];
+	
+	// get result by id
+	$result_map = mxmpotm_select_row( $id_map );
+
+	// unserialize points
+	$unserialize_points = maybe_unserialize( $result_map->points );
+
+	var_dump( $unserialize_points );
+
+	// create js object for display data
+	return mxmpotm_create_js_object_points( $unserialize_points );
+
+	
+
+
+	
+
+}
+
+add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
+
+// create js object
+function mxmpotm_create_js_object_points( $points ) {	
+
+	// create html
+	$html = 'sss<script>
+		var points = [';
+
+			foreach ( $points as $key => $value ) :
+			
+	    		$html .='{
+	    			"type": "Feature",
+		        	"id": ' . $value['point_id'] . ',
+		        	"geometry": {
+		        		"type": "Point",
+		        		"coordinates": [
+		        			"' . $value['point_latitude'] . '",
+							"' . $value['point_longitude'] . '"
+						]
+					},
+
+					"mx_object": {
+						"areas": ["' .
+							implode( "\",\"", $value['areas'] )
+						. '"]
+					},
+
+					"options": {
+						"iconLayout": "default#image"
+					},
+
+					"properties": {
+						"balloonContent": `
+							<div id="mxmpotmModal1">
+								<h4>' . $value['point_name'] . '</h4>
+								
+								<p class="mxmpotm-map_adress"><strong>' . __( 'Address:', 'mxmpotm-map' ) . '</strong> 
+									' . $value['point_address'] . '
+								</p>
+
+								<div class="mxmpotm-areas_wrap">
+
+									<strong>Районы:</strong>
+														
+									<p>Матушкино</p>
+													
+									<p>Савелки</p>
+										
+								</div>
+
+							</div>
+						`
+					}
+				},';
+
+			endforeach;
+
+		$html .= '];
+
+	</script>';
+
+	return $html;
+
+}
