@@ -148,6 +148,56 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 		</div>
 
+		<div class="form-group">
+			
+			<label for="mx_default_zoon_map"><?php echo __( 'Default zoom map:', 'mxmpotm-map' ); ?></label>
+
+			<select name="mx_default_zoon_map" id="mx_default_zoon_map" class="form-control">
+				
+				<?php for( $i = 1; $i <= 18; $i++ ) : ?>
+					
+					<option value="<?php echo $i; ?>" <?php if( $map_rows->zoom_map_center == $i ) echo 'selected'; ?>><?php echo $i; ?></option>
+
+				<?php endfor; ?>
+
+			</select>
+
+		</div>
+
+		<div class="form-group">
+			
+			<label for="mx_default_zoon_to_point"><?php echo __( 'Default zoom to the point:', 'mxmpotm-map' ); ?></label>
+
+			<select name="mx_default_zoon_to_point" id="mx_default_zoon_to_point" class="form-control">
+				
+				<?php for( $y = 8; $y <= 18; $y++ ) : ?>
+					
+					<option value="<?php echo $y; ?>" <?php if( $map_rows->zoom_to_point == $y ) echo 'selected'; ?>><?php echo $y; ?></option>
+
+				<?php endfor; ?>
+
+			</select>
+
+		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<div class="form-group">
+
+			<h6><?php echo __( 'Map size:', 'mxmpotm-map' ); ?></h6>
+			
+			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
+
+			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100%', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_width; ?>" required />
+
+			<label for="mx_size_map_height"><?php echo __( 'Height:', 'mxmpotm-map' ); ?></label>
+
+			<input type="text" name="mx_size_map_height" class="form-control" id="mx_size_map_height" placeholder="<?php echo __( 'For example: 500px', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_height; ?>" required />
+
+		</div>
+
 		<p class="mx-submit_button_wrap">
 			<input type="hidden" id="mxmpotm_wpnonce" name="mxmpotm_wpnonce" value="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" />
 

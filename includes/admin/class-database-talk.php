@@ -46,7 +46,7 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
 
 			// Add map
-			$this->add_new_map( $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'] );
+			$this->add_new_map( $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'], $_POST['zoom_map_to_point'], $_POST['map_width'], $_POST['map_height'] );
 
 		}
 
@@ -55,7 +55,7 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Add data
-		public function add_new_map( $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center )
+		public function add_new_map( $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height )
 		{
 
 			// name of the map
@@ -135,6 +135,14 @@ class MXMPOTMDataBaseTalk
 			// zoom of the map
 			$zoom_map_center = sanitize_text_field( $zoom_map_center );
 
+			// zoom to the point
+			$zoom_map_to_point = sanitize_text_field( $zoom_map_to_point );
+
+			// map size
+			$map_width = sanitize_text_field( $map_width );
+
+			$map_height = sanitize_text_field( $map_height );
+
 			global $wpdb;
 
 			$table_name = $wpdb->prefix . MXMPOTM_TABLE_SLUG;
@@ -147,7 +155,10 @@ class MXMPOTMDataBaseTalk
 					'points'				=> $obj_points,
 					'latitude_map_center' 	=> $latitude_center,
 					'longitude_map_center'	=> $longitude_center,
-					'zoom_map_center'		=> $zoom_map_center
+					'zoom_map_center'		=> $zoom_map_center,
+					'zoom_to_point'			=> $zoom_map_to_point,
+					'map_width'				=> $map_width,
+					'map_height'			=> $map_height
 				), 
 				array( 
 					'%s', 
@@ -155,7 +166,10 @@ class MXMPOTMDataBaseTalk
 					'%s',
 					'%s',
 					'%s',
-					'%d'
+					'%d',
+					'%d',
+					'%s',
+					'%s'
 				) 
 			);
 
@@ -174,7 +188,7 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
 
 			// Update map
-			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'] );
+			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'], $_POST['zoom_map_to_point'], $_POST['map_width'], $_POST['map_height'] );
 
 		}
 
@@ -183,7 +197,7 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Update map
-		public function update_map( int $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center  )
+		public function update_map( int $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height  )
 		{
 
 			// name of the map
@@ -263,6 +277,14 @@ class MXMPOTMDataBaseTalk
 			// zoom of the map
 			$zoom_map_center = sanitize_text_field( $zoom_map_center );
 
+			// zoom to the point
+			$zoom_map_to_point = sanitize_text_field( $zoom_map_to_point );
+
+			// map size
+			$map_width = sanitize_text_field( $map_width );
+
+			$map_height = sanitize_text_field( $map_height );
+
 			global $wpdb;
 
 			$table_name = $wpdb->prefix . MXMPOTM_TABLE_SLUG;
@@ -275,7 +297,10 @@ class MXMPOTMDataBaseTalk
 					'points'				=> $obj_points,
 					'latitude_map_center' 	=> $latitude_center,
 					'longitude_map_center'	=> $longitude_center,
-					'zoom_map_center'		=> $zoom_map_center
+					'zoom_map_center'		=> $zoom_map_center,
+					'zoom_to_point'			=> $zoom_map_to_point,
+					'map_width'				=> $map_width,
+					'map_height'			=> $map_height
 				), 
 				array( 'id' => $id_map ),
 				array( 
@@ -284,7 +309,10 @@ class MXMPOTMDataBaseTalk
 					'%s',
 					'%s',
 					'%s',
-					'%d'
+					'%d',
+					'%d',
+					'%s',
+					'%s'
 				) 
 			);
 

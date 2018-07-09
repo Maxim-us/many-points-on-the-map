@@ -230,7 +230,13 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 	var longitude_center 	= $( '#mx_longitude_map_center' ).val();
 
-	var zoom_map_center 	= 10;
+	var zoom_map_center 	= $( '#mx_default_zoon_map' ).val();
+
+	var zoom_map_to_point 	= $( '#mx_default_zoon_to_point' ).val();
+
+	var map_width 	= $( '#mx_size_map_width' ).val();
+
+	var map_height 	= $( '#mx_size_map_height' ).val();
 
 	var obj_points 	= {};
 
@@ -299,7 +305,10 @@ function mxmpotm_ajax_data( $, _this, action ) {
 			'latitude_center'	: 	latitude_center,
 			'longitude_center'	: 	longitude_center,
 			'obj_points' 		: 	obj_points,
-			'zoom_map_center'	: 	zoom_map_center
+			'zoom_map_center'	: 	zoom_map_center,
+			'zoom_map_to_point' : 	zoom_map_to_point,
+			'map_width'			: 	map_width,
+			'map_height'		: 	map_height
 
 		};
 
@@ -316,7 +325,6 @@ function mxmpotm_ajax_data( $, _this, action ) {
 				alert( dataNotSavedText );
 
 			}
-
 			
 		} );
 

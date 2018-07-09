@@ -29,9 +29,12 @@ class MXMPOTMBasisPluginClass
 				`map_name` text NOT NULL,
 				`map_desc` text DEFAULT '' NOT NULL,
 				`points` longtext NOT NULL,
+				`map_width` varchar(6) DEFAULT '100%' NOT NULL,
+				`map_height` varchar(6) DEFAULT '500px' NOT NULL,
 				`latitude_map_center` varchar(15) NOT NULL,
 				`longitude_map_center` varchar(15) NOT NULL,
-				`zoom_map_center` varchar(3) DEFAULT '10' NOT NULL,
+				`zoom_map_center` int(3) DEFAULT 10 NOT NULL,
+				`zoom_to_point` int(2) DEFAULT 12 NOT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=MyISAM DEFAULT CHARSET=$wpdb->charset AUTO_INCREMENT=1;";
 
