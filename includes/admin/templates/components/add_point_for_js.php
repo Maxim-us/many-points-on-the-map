@@ -12,27 +12,37 @@
 
 	<button type="button" class="mx-del_point" title="<?php echo __( 'Delete point', 'mxmpotm-map' ); ?>"><i class="fa fa-trash"></i></button>
 		
-	<div class="form-group">
+	<div class="form-group mx-form-group_first">
 
-		<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="<?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *" />
+		<small class="form-text text-muted"><?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *</small>
+		<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="" />
 
-		<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder="<?php echo __( 'Describe the point', 'mxmpotm-map' ); ?>"></textarea>
+		<small class="form-text text-muted"><?php echo __( 'Describe the point', 'mxmpotm-map' ); ?></small>
+		<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder=""></textarea>
 
 		<div>
 			
-			<small class="form-text text-muted"><?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?></small>
-			<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" />
+			<small class="form-text text-muted"><?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *</small>
+			<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?>" />
 			
-
-			<small class="form-text text-muted"><?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?></small>
-			<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" />
+			<small class="form-text text-muted"><?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *</small>
+			<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates" placeholder="<?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?>" />
 			
-
 		</div>
 
-		<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required"  placeholder="<?php echo __( 'Address', 'mxmpotm-map' ); ?> *" />					
+		<small class="form-text text-muted"><?php echo __( 'Address', 'mxmpotm-map' ); ?> *</small>
+		<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required" placeholder="" />
 
-		<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder="<?php echo __( 'Additional information', 'mxmpotm-map' ); ?>"></textarea>
+		<!-- web site -->
+		<small class="form-text text-muted"><?php echo __( 'WebSite', 'mxmpotm-map' ); ?></small>
+		<input type="text" name="mx_new_point_web_site" class="mx_new_point_web_site form-control" placeholder="" value="" />
+
+		<!-- phone -->
+		<small class="form-text text-muted"><?php echo __( 'Phone', 'mxmpotm-map' ); ?></small>
+		<input type="text" name="mx_new_point_phone" class="mx_new_point_phone form-control" placeholder="" value="" />
+
+		<small class="form-text text-muted"><?php echo __( 'Additional information', 'mxmpotm-map' ); ?></small>
+		<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder=""></textarea>
 
 		<!-- regions -->
 		<div class="mxmpotm_point_area_wrap">

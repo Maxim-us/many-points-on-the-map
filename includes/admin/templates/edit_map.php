@@ -25,7 +25,7 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 ?>
 
-<h1><?php echo __( 'Edit map', 'mxmpotm-map' ); ?></h1>
+<h1 class="text-secondary"><?php echo __( 'Edit map', 'mxmpotm-map' ); ?></h1>
 
 <form id="mxmpotm_map_update" class="mx-settings" method="post" action="">
 
@@ -47,9 +47,103 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 	</div>
 
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Coordinates of the map:', 'mxmpotm-map' ); ?></h5>
+
+		<div class="form-group">
+
+			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<input type="text" name="mx_latitude_map_center" class="form-control mx-is_coordinates" id="mx_latitude_map_center" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->latitude_map_center; ?>" required />
+
+		</div>
+
+		<div class="form-group">
+			
+			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" id="mx_longitude_map_center" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->longitude_map_center; ?>" required />
+
+		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Scaling a map:', 'mxmpotm-map' ); ?></h5>
+
+		<div class="form-group">
+			
+			<label for="mx_default_zoon_map"><?php echo __( 'Default zoom map:', 'mxmpotm-map' ); ?></label>
+
+			<select name="mx_default_zoon_map" id="mx_default_zoon_map" class="form-control">
+				
+				<?php for( $i = 1; $i <= 18; $i++ ) : ?>
+					
+					<option value="<?php echo $i; ?>" <?php if( $map_rows->zoom_map_center == $i ) echo 'selected'; ?>><?php echo $i; ?></option>
+
+				<?php endfor; ?>
+
+			</select>
+
+		</div>
+
+		<div class="form-group">
+			
+			<label for="mx_default_zoon_to_point"><?php echo __( 'Default zoom to the point:', 'mxmpotm-map' ); ?></label>
+
+			<select name="mx_default_zoon_to_point" id="mx_default_zoon_to_point" class="form-control">
+				
+				<?php for( $y = 8; $y <= 18; $y++ ) : ?>
+					
+					<option value="<?php echo $y; ?>" <?php if( $map_rows->zoom_to_point == $y ) echo 'selected'; ?>><?php echo $y; ?></option>
+
+				<?php endfor; ?>
+
+			</select>
+
+		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Map size:', 'mxmpotm-map' ); ?></h5>
+
+		<div class="form-group">			
+			
+			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
+
+			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100%', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_width; ?>" required />
+
+		</div>
+
+		<div class="form-group">
+
+			<label for="mx_size_map_height"><?php echo __( 'Height:', 'mxmpotm-map' ); ?></label>
+
+			<input type="text" name="mx_size_map_height" class="form-control" id="mx_size_map_height" placeholder="<?php echo __( 'For example: 500px', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_height; ?>" required />
+
+		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Filters:', 'mxmpotm-map' ); ?></h5>
+
+		<div class="form-group">
+
+			<label for="mx_show_region_filter"><?php echo __( 'Show region filter:', 'mxmpotm-map' ); ?></label>
+
+			<input type="checkbox" name="mx_show_region_filter" class="form-control" id="mx_show_region_filter" value="<?php echo $map_rows->filter_regions; ?>" <?php if( $map_rows->filter_regions == 1 ) echo 'checked'; ?> />
+
+		</div>	
+
+	</div>
+
 	<!-- area of creating a new points  -->
 	<br>
-	<h2><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
+	<h2 class="text-secondary"><?php echo __( 'Create points on the map', 'mxmpotm-map' ); ?></h2>
 
 	<!-- Working block -->
 	<div class="mx-block_wrap" id="mxmpotm_points_wrap">
@@ -69,25 +163,37 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 				<button type="button" class="mx-del_point" title="<?php echo __( 'Delete point', 'mxmpotm-map' ); ?>"><i class="fa fa-trash"></i></button>
 					
-				<div class="form-group">
+				<div class="form-group mx-form-group_first">
 
-					<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="<?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_name']; ?>" />
+					<small class="form-text text-muted"><?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *</small>
+					<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="" value="<?php echo $point['point_name']; ?>" />
 
-					<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder="<?php echo __( 'Describe the point', 'mxmpotm-map' ); ?>"><?php echo $point['point_desc']; ?></textarea>
+					<small class="form-text text-muted"><?php echo __( 'Describe the point', 'mxmpotm-map' ); ?></small>
+					<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder=""><?php echo $point['point_desc']; ?></textarea>
 
 					<div>
 						
-						<small class="form-text text-muted"><?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?></small>
-						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_latitude']; ?>" />
+						<small class="form-text text-muted"><?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *</small>
+						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?>" value="<?php echo $point['point_latitude']; ?>" />
 
-						<small class="form-text text-muted"><?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?></small>
-						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_longitude']; ?>" />
+						<small class="form-text text-muted"><?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *</small>
+						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?>" value="<?php echo $point['point_longitude']; ?>" />
 
 					</div>
 
-					<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required" placeholder="<?php echo __( 'Address', 'mxmpotm-map' ); ?> *" value="<?php echo $point['point_address']; ?>" />					
+					<small class="form-text text-muted"><?php echo __( 'Address', 'mxmpotm-map' ); ?> *</small>
+					<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required" placeholder="" value="<?php echo $point['point_address']; ?>" />
 
-					<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder="<?php echo __( 'Additional information', 'mxmpotm-map' ); ?>"><?php echo $point['point_additional']; ?></textarea>
+					<!-- web site -->
+					<small class="form-text text-muted"><?php echo __( 'WebSite', 'mxmpotm-map' ); ?></small>
+					<input type="text" name="mx_new_point_web_site" class="mx_new_point_web_site form-control" placeholder="" value="<?php echo $point['web_site']; ?>" />
+
+					<!-- phone -->
+					<small class="form-text text-muted"><?php echo __( 'Phone', 'mxmpotm-map' ); ?></small>
+					<input type="text" name="mx_new_point_phone" class="mx_new_point_phone form-control" placeholder="" value="<?php echo $point['phone']; ?>" />
+
+					<small class="form-text text-muted"><?php echo __( 'Additional information', 'mxmpotm-map' ); ?></small>
+					<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder=""><?php echo $point['point_additional']; ?></textarea>
 				
 					<!-- regions -->
 					<div class="mxmpotm_point_area_wrap">
@@ -130,73 +236,9 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 	<div class="mx-block_wrap" id="mxmpotm_points_wrap_example" style="display: none;">
 		<?php include( 'components/add_point_for_js.php' ); ?>
 	</div>
-	<!-- end JS block -->
+	<!-- end JS block -->	
 
 	<div class="mx-block_wrap">
-
-		<div class="form-group">
-
-			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_latitude_map_center" class="form-control mx-is_coordinates" id="mx_latitude_map_center" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->latitude_map_center; ?>" required />
-
-		</div>
-
-		<div class="form-group">
-			
-			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
-			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" id="mx_longitude_map_center" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->longitude_map_center; ?>" required />
-
-		</div>
-
-		<div class="form-group">
-			
-			<label for="mx_default_zoon_map"><?php echo __( 'Default zoom map:', 'mxmpotm-map' ); ?></label>
-
-			<select name="mx_default_zoon_map" id="mx_default_zoon_map" class="form-control">
-				
-				<?php for( $i = 1; $i <= 18; $i++ ) : ?>
-					
-					<option value="<?php echo $i; ?>" <?php if( $map_rows->zoom_map_center == $i ) echo 'selected'; ?>><?php echo $i; ?></option>
-
-				<?php endfor; ?>
-
-			</select>
-
-		</div>
-
-		<div class="form-group">
-			
-			<label for="mx_default_zoon_to_point"><?php echo __( 'Default zoom to the point:', 'mxmpotm-map' ); ?></label>
-
-			<select name="mx_default_zoon_to_point" id="mx_default_zoon_to_point" class="form-control">
-				
-				<?php for( $y = 8; $y <= 18; $y++ ) : ?>
-					
-					<option value="<?php echo $y; ?>" <?php if( $map_rows->zoom_to_point == $y ) echo 'selected'; ?>><?php echo $y; ?></option>
-
-				<?php endfor; ?>
-
-			</select>
-
-		</div>
-
-	</div>
-
-	<div class="mx-block_wrap">
-
-		<div class="form-group">
-
-			<h6><?php echo __( 'Map size:', 'mxmpotm-map' ); ?></h6>
-			
-			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
-
-			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100%', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_width; ?>" required />
-
-			<label for="mx_size_map_height"><?php echo __( 'Height:', 'mxmpotm-map' ); ?></label>
-
-			<input type="text" name="mx_size_map_height" class="form-control" id="mx_size_map_height" placeholder="<?php echo __( 'For example: 500px', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_height; ?>" required />
-
-		</div>
 
 		<p class="mx-submit_button_wrap">
 			<input type="hidden" id="mxmpotm_wpnonce" name="mxmpotm_wpnonce" value="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" />

@@ -6,6 +6,6 @@
 
 	var dataSavedText = '<?php echo __( 'Data is saved.', 'mxmpotm-map' ); ?>';
 
-	var dataNotSavedText = '<?php echo __( 'Data not saved.', 'mxmpotm-map' ); ?>';;
+	var dataNotSavedText = '<?php echo __( 'Data not saved.', 'mxmpotm-map' ); ?>';
 
 </script>

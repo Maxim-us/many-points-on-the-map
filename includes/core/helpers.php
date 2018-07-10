@@ -22,7 +22,7 @@ function mxmpotm_select_row( $id ) {
 
 	$table_name = $wpdb->prefix . MXMPOTM_TABLE_SLUG;
 
-	$get_row_map = $wpdb->get_row( "SELECT map_name, map_desc, points, latitude_map_center, longitude_map_center, zoom_map_center, zoom_to_point, map_width, map_height FROM $table_name WHERE id = $id" );
+	$get_row_map = $wpdb->get_row( "SELECT map_name, map_desc, points, latitude_map_center, longitude_map_center, zoom_map_center, zoom_to_point, map_width, map_height, filter_regions FROM $table_name WHERE id = $id" );
 
 	return $get_row_map;
 
@@ -77,7 +77,7 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 		// get filter
 		$html .= mxmpotm_filter_map( $map, $points  );
 
-		$html .= '<div id="map" style="width: 100%; height: 500px"></div>';
+		$html .= '<div id="map" style="width: ' . $map->map_width . '; height: ' . $map->map_height . '"></div>';
 
 		$html .= '<script> var points = [';
 
@@ -93,7 +93,7 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 
 					$html .= '"options": {"iconLayout": "default#image"},';
 
-					$html .= '"properties": {"balloonContent": `' . mxmpotm_show_content( $value['point_id'], $value['point_name'], $value['point_address'], '00000000000', 'www.site.ua', $value['areas'], $value['point_desc'] ) . '`}},';
+					$html .= '"properties": {"balloonContent": `' . mxmpotm_show_content( $value['point_id'], $value['point_name'], $value['point_address'], $value['phone'], $value['web_site'], $value['areas'], $value['point_desc'], $value['point_additional'] ) . '`}},';
 
 				endforeach;
 
@@ -132,31 +132,53 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 	}
 
 	// show modal window on the map
-	function mxmpotm_show_content( $id, $name, $adress, $phone, $website, $areas, $point_desc ) {
+	function mxmpotm_show_content( $id, $name, $adress, $phone, $website, $areas, $point_desc, $point_additional ) {
 
 		$html = '<div id="mxmpotmModal' . $id .'">';
 
 			$html .= '<h4>' . $name . '</h4>';
 
-			$html .= '<p class="mxmpotm-point_desc">'. $point_desc . '</p>';
+			if( $point_desc !== '' ) {
+
+				$html .= '<p class="mxmpotm-point_desc">'. $point_desc . '</p>';
+
+			}			
 
 			$html .= '<p class="mxmpotm-point_adress"><strong>' . __( 'Address:', 'mxmpotm-map' ) . '</strong> ' . $adress . '</p>';
 
-			$html .= '<p class="mxmpotm-point_phone"><strong>' . __( 'Phone:', 'mxmpotm-map' ) . '</strong> ' . $phone . '</p>';
-				
-			$html .= '<p class="mxmpotm-map_website"><strong>' . __( 'Web-site:', 'mxmpotm-map' ) . '</strong> <a href="' . $website . '" target="_blank">' . $website . '</a></p>';
+			if( $website !== '' ) {
 
-			$html .= '<div class="mxmpotm-areas_wrap">';
+				$html .= '<p class="mxmpotm-point_website"><strong>' . __( 'Web-site:', 'mxmpotm-map' ) . '</strong> <a href="' . $website . '" target="_blank">' . $website . '</a></p>';
 
-			$html .= '<strong>' . __( 'Areas:', 'mxmpotm-map' ) . '</strong>';
+			}
 
-					for( $i = 0; $i < count( $areas ); $i++ ) {
-						
-						$html .= '<p>' . $areas[$i] . '</p>';
+			if( $phone !== '' ) {
 
-					}
+				$html .= '<p class="mxmpotm-point_phone"><strong>' . __( 'Phone:', 'mxmpotm-map' ) . '</strong> ' . $phone . '</p>';
 
-			$html .= '</div>';
+			}			
+
+			if( $point_additional !== '' ) {
+
+				$html .= '<p class="mxmpotm-point_phone"><strong>' . __( 'Additional:', 'mxmpotm-map' ) . '</strong> ' . $point_additional . '</p>';
+
+			}			
+
+			if( count( $areas ) !== 0 ) {
+
+				$html .= '<div class="mxmpotm-areas_wrap">';
+
+					$html .= '<strong>' . __( 'Regions:', 'mxmpotm-map' ) . '</strong>';
+
+						for( $i = 0; $i < count( $areas ); $i++ ) {
+							
+							$html .= '<p>' . $areas[$i] . '</p>';
+
+						}
+
+				$html .= '</div>';
+
+			}			
 
 		$html .= '</div>';
 
@@ -165,33 +187,38 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 	}
 
 	// fister
-	function mxmpotm_filter_map( $map, $points  ) {
+	function mxmpotm_filter_map( $map, $points  ) {		
 
 		$html = '<div class="mxmpotm_map_filter_wrap">';
 
-			$html .= '<div class="mxmpotm_map_filter_type_select">';
+			// show filter by region
+			if( $map->filter_regions == 1 ) {
 
-				$html .= '<div class="mxmpotm_map_filter_type_select_area">';
+				$html .= '<div class="mxmpotm_map_filter_type_select">';
+
+					$html .= '<div class="mxmpotm_map_filter_type_select_point">';
+
+						$html .= '<label for="mxmpotm_type_filter_point">' . __( 'All points:', 'mxmpotm-map' ) . '</label>';
+
+						$html .= '<input type="radio" name="mxmpotm_type_filter" id="mxmpotm_type_filter_point" value="point" checked />';
+
+					$html .= '</div>';
+
+					$html .= '<div class="mxmpotm_map_filter_type_select_area">';
 					
-					$html .= '<label for="mxmpotm_type_filter_area">' . __( 'Areas:', 'mxmpotm-map' ) . '</label>';
+						$html .= '<label for="mxmpotm_type_filter_area">' . __( 'Regions:', 'mxmpotm-map' ) . '</label>';
 
-					$html .= '<input type="radio" name="mxmpotm_type_filter" id="mxmpotm_type_filter_area" value="area" checked />';
+						$html .= '<input type="radio" name="mxmpotm_type_filter" id="mxmpotm_type_filter_area" value="area" />';
+
+					$html .= '</div>';						
 
 				$html .= '</div>';
 
-				$html .= '<div class="mxmpotm_map_filter_type_select_point">';
-
-					$html .= '<label for="mxmpotm_type_filter_point">' . __( 'All points:', 'mxmpotm-map' ) . '</label>';
-
-					$html .= '<input type="radio" name="mxmpotm_type_filter" id="mxmpotm_type_filter_point" value="point" />';
-
-				$html .= '</div>';	
-
-			$html .= '</div>';
+			}
 
 			$html .= '<div class="mx-clearfix"></div>';
 			
-			$html .= '<div class="mxmpotm_map_filter_search_point" style="display: none">';
+			$html .= '<div class="mxmpotm_map_filter_search_point">';
 				
 				$html .= '<label for="mxmpotm_map_search_point">' . __( 'Search points:', 'mxmpotm-map' ) . '</label>';
 
@@ -208,14 +235,20 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 				$html .= '</select>';
 
 			$html .= '</div>';
+
+			// show filter by region
+			if( $map->filter_regions == 1 ) {
+
+				$html .= '<div class="mxmpotm_map_filter_search_area" style="display: none">';
+
+					$html .= '<label for="mxmpotm_map_search_area">' . __( 'Search region:', 'mxmpotm-map' ) . '</label>';
+
+					$html .= '<select id="mxmpotm_map_search_area"></select>';
+
+				$html .= '</div>';
+
+			}			
 			
-			$html .= '<div class="mxmpotm_map_filter_search_area">';
-
-				$html .= '<label for="mxmpotm_map_search_area">' . __( 'Search areas:', 'mxmpotm-map' ) . '</label>';
-
-				$html .= '<select id="mxmpotm_map_search_area"></select>';
-
-			$html .= '</div>';
 		$html .= '</div>';
 
 		return $html;
@@ -227,7 +260,7 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 
 		$html = '<script>';
 
-			$html .= 'var allAreasText = "' . __( 'All areas', 'mxmpotm-map' ) . '";';
+			$html .= 'var allAreasText = "' . __( 'All regions', 'mxmpotm-map' ) . '";';
 
 			$html .= 'var centerMapLatDefault = parseFloat( ' . $map->latitude_map_center . ' );';
 

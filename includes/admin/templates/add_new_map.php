@@ -27,34 +27,29 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	</div>
 
-	<!-- area of creating a new points  -->
-	<br>
-	<h2 class="text-secondary"><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
-
-	<!-- Working block -->
-	<div class="mx-block_wrap" id="mxmpotm_points_wrap"></div>
-
-	<!-- This block is an example block structure. For JS -->
-	<div class="mx-block_wrap" id="mxmpotm_points_wrap_example" style="display: none;">
-		<?php include( 'components/add_point_for_js.php' ); ?>
-	</div>
-	<!-- end JS block -->
-
 	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Coordinates of the map:', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 
-			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" name="mx_latitude_map_center form-control" class="form-control mx-is_coordinates" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" id="mx_latitude_map_center" required />
 
 		</div>
 
 		<div class="form-group">
 			
-			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" id="mx_longitude_map_center" required />
 
 		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Scaling a map:', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 			
@@ -98,13 +93,48 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			
 			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
 
-			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100%', 'mxmpotm-map' ); ?>" value="100%<?php //echo $map_rows->map_size; ?>" required />
+			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100% or 700px', 'mxmpotm-map' ); ?>" value="100%" required />
+
+		</div>
+
+		<div class="form-group">
 
 			<label for="mx_size_map_height"><?php echo __( 'Height:', 'mxmpotm-map' ); ?></label>
 
-			<input type="text" name="mx_size_map_height" class="form-control" id="mx_size_map_height" placeholder="<?php echo __( 'For example: 500px', 'mxmpotm-map' ); ?>" value="500px<?php //echo $map_rows->map_size; ?>" required />
+			<input type="text" name="mx_size_map_height" class="form-control" id="mx_size_map_height" placeholder="<?php echo __( 'For example: 500px', 'mxmpotm-map' ); ?>" value="500px" required />
 
 		</div>
+
+	</div>
+
+	<div class="mx-block_wrap">
+
+		<h5><?php echo __( 'Filters:', 'mxmpotm-map' ); ?></h5>
+
+		<div class="form-group">
+
+			<label for="mx_show_region_filter"><?php echo __( 'Show region filter:', 'mxmpotm-map' ); ?></label>
+
+			<input type="checkbox" name="mx_show_region_filter" class="form-control" id="mx_show_region_filter" value="0" />
+
+		</div>	
+
+	</div>
+
+	<!-- area of creating a new points  -->
+	<br>
+	<h2 class="text-secondary"><?php echo __( 'Create new points on the map', 'mxmpotm-map' ); ?></h2>
+
+	<!-- Working block -->
+	<div class="mx-block_wrap" id="mxmpotm_points_wrap"></div>
+
+	<!-- This block is an example block structure. For JS -->
+	<div class="mx-block_wrap" id="mxmpotm_points_wrap_example" style="display: none;">
+		<?php include( 'components/add_point_for_js.php' ); ?>
+	</div>
+	<!-- end JS block -->
+
+	<div class="mx-block_wrap">
 
 		<p class="mx-submit_button_wrap">
 			<input type="hidden" id="mxmpotm_wpnonce" name="mxmpotm_wpnonce" value="<?php echo wp_create_nonce( 'mxmpotm_nonce_request' ) ;?>" />

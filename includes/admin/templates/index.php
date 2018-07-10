@@ -5,10 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid mt-1">
 	
 	<div class="row">
-		<div class="col-12">
+		<div class="col-12 mt-2">
 
 			<h1 class="float-left text-secondary"><?php echo __( 'All maps', 'mxmpotm-map' ); ?></h1>
 

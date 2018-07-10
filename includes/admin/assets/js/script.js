@@ -199,7 +199,7 @@ jQuery( document ).ready( function( $ ) {
 
 		$( this ).parent().remove();
 
-	} );
+	} );	
 
 } );
 
@@ -238,6 +238,14 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 	var map_height 	= $( '#mx_size_map_height' ).val();
 
+	var filter_regions = 0;
+
+	if( $( '#mx_show_region_filter' ).prop( 'checked' ) ) {
+
+		filter_regions = 1;
+
+	}
+
 	var obj_points 	= {};
 
 	// get data of points
@@ -264,6 +272,12 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 		// push address into tmp obj
 		obj_point_tmp['point_address'] = $( this ).find( '.mx_new_point_address' ).val();
+
+		// web site
+		obj_point_tmp['web_site'] = $( this ).find( '.mx_new_point_web_site' ).val();
+
+		// phone
+		obj_point_tmp['phone'] = $( this ).find( '.mx_new_point_phone' ).val();
 
 		// push additional into tmp obj
 		obj_point_tmp['point_additional'] = $( this ).find( '.mx_new_point_additional' ).val();
@@ -308,7 +322,8 @@ function mxmpotm_ajax_data( $, _this, action ) {
 			'zoom_map_center'	: 	zoom_map_center,
 			'zoom_map_to_point' : 	zoom_map_to_point,
 			'map_width'			: 	map_width,
-			'map_height'		: 	map_height
+			'map_height'		: 	map_height,
+			'filter_regions' 	: 	filter_regions
 
 		};
 

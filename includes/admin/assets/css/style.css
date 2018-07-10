@@ -16,6 +16,7 @@
 }
 .mx-submit_button_wrap {
     text-align: right;
+    margin-bottom: 0;
 }
 .mx-restore_data {
     float: left;
@@ -45,11 +46,17 @@
 }
 
 /*points*/
+.mx-form-group_first {
+    margin-top: -20px;
+}
+.mx-form-group_first small:first-child {
+    margin-left: 22px;
+}
 .mx-del_point {
     display: block;
     position: absolute;
     right: 0px;
-    margin-top: 18px;
+    margin-top: 26px;
     border: 1px solid #ddd;
     color: #ddd;
     background: transparent;
@@ -77,7 +84,7 @@
     margin-bottom: 12px;
     border-bottom: 1px solid #0085ba;
     overflow: hidden;
-    height: 82px;
+    height: 90px;
 }
 .mx_number_of_point {
     position: absolute;

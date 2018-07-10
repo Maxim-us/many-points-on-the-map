@@ -86,25 +86,35 @@ class MXMPOTMDataBaseTalk
 
 					$tmp_array['point_desc'] = $point_desc;
 
-				// point_desc
+				// point_latitude
 				$point_latitude = sanitize_text_field( $value['point_latitude'] );
 
 					$tmp_array['point_latitude'] = $point_latitude;
 
-				// point_desc
+				// point_longitude
 				$point_longitude = sanitize_text_field( $value['point_longitude'] );
 
 					$tmp_array['point_longitude'] = $point_longitude;
 
-				// point_desc
+				// point_address
 				$point_address = sanitize_text_field( $value['point_address'] );
 
 					$tmp_array['point_address'] = $point_address;
 
-				// point_desc
+				// point_additional
 				$point_additional = sanitize_text_field( $value['point_additional'] );
 
 					$tmp_array['point_additional'] = $point_additional;
+
+				// web_site
+				$web_site = sanitize_text_field( $value['web_site'] );
+
+					$tmp_array['web_site'] = $web_site;
+
+				// phone
+				$phone = sanitize_text_field( $value['phone'] );
+
+					$tmp_array['phone'] = $phone;
 
 					// areas
 					$tmp_all_areas = array();
@@ -188,7 +198,7 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_nonce_request' ) ){
 
 			// Update map
-			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'], $_POST['zoom_map_to_point'], $_POST['map_width'], $_POST['map_height'] );
+			$this->update_map( $_POST['id_map'], $_POST['mapName'], $_POST['mapDesc'], $_POST['obj_points'], $_POST['latitude_center'], $_POST['longitude_center'], $_POST['zoom_map_center'], $_POST['zoom_map_to_point'], $_POST['map_width'], $_POST['map_height'], $_POST['filter_regions'] );
 
 		}
 
@@ -197,7 +207,7 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Update map
-		public function update_map( int $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height  )
+		public function update_map( int $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height, int $filter_regions )
 		{
 
 			// name of the map
@@ -228,25 +238,35 @@ class MXMPOTMDataBaseTalk
 
 					$tmp_array['point_desc'] = $point_desc;
 
-				// point_desc
+				// point_latitude
 				$point_latitude = sanitize_text_field( $value['point_latitude'] );
 
 					$tmp_array['point_latitude'] = $point_latitude;
 
-				// point_desc
+				// point_longitude
 				$point_longitude = sanitize_text_field( $value['point_longitude'] );
 
 					$tmp_array['point_longitude'] = $point_longitude;
 
-				// point_desc
+				// point_address
 				$point_address = sanitize_text_field( $value['point_address'] );
 
 					$tmp_array['point_address'] = $point_address;
 
-				// point_desc
+				// point_additional
 				$point_additional = sanitize_text_field( $value['point_additional'] );
 
 					$tmp_array['point_additional'] = $point_additional;
+
+				// web_site
+				$web_site = sanitize_text_field( $value['web_site'] );
+
+					$tmp_array['web_site'] = $web_site;
+
+				// phone
+				$phone = sanitize_text_field( $value['phone'] );
+
+					$tmp_array['phone'] = $phone;
 
 					// areas
 					$tmp_all_areas = array();
@@ -300,7 +320,8 @@ class MXMPOTMDataBaseTalk
 					'zoom_map_center'		=> $zoom_map_center,
 					'zoom_to_point'			=> $zoom_map_to_point,
 					'map_width'				=> $map_width,
-					'map_height'			=> $map_height
+					'map_height'			=> $map_height,
+					'filter_regions' 		=> $filter_regions
 				), 
 				array( 'id' => $id_map ),
 				array( 
@@ -312,7 +333,8 @@ class MXMPOTMDataBaseTalk
 					'%d',
 					'%d',
 					'%s',
-					'%s'
+					'%s',
+					'%d'
 				) 
 			);
 
