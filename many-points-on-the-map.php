@@ -63,4 +63,16 @@ if ( ! class_exists( 'MXMPOTMManyPointsOnTheMap' ) ) {
 	// Deactivation
 	register_deactivation_hook( __FILE__, array( 'MXMPOTMBasisPluginClass', 'deactivate' ) );
 
+	/*
+	* Translate plugin
+	*/
+	add_action( 'plugins_loaded', 'mxmpotm_translate' );
+
+	function mxmpotm_translate()
+	{
+
+		load_plugin_textdomain( 'mxmpotm-map', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+	}
+
 }

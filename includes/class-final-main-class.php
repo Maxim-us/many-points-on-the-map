@@ -14,7 +14,7 @@ final class MXMPOTMManyPointsOnTheMap
 
 		$this->define_constants();
 		
-		$this->mxmpotm_include();
+		$this->mxmpotm_include();		
 
 	}
 
@@ -66,6 +66,5 @@ final class MXMPOTMManyPointsOnTheMap
 		}
 
 	}
-
 
 }

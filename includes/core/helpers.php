@@ -16,7 +16,7 @@ function mxmpotm_require_template_admin( $file ) {
 * Select data
 */
 // select row by id
-function mxmpotm_select_row( $id ) {
+function mxmpotm_select_row( int $id ) {
 
 	global $wpdb;
 
@@ -47,13 +47,16 @@ function mxmpotm_select_rows() {
 function mxmpotm_show_many_points_map( $args ) {
 
 	// if isset id of the map
-	if( ! isset( $args['id'] ) ) return;
+	if( ! isset( $args['id'] ) ) return '<strong>Error in shortcode!</strong>';
 
 	// save this id
-	$id_map = $args['id'];
+	$id_map = intval( $args['id'] );
 	
 	// get result by id
 	$result_map = mxmpotm_select_row( $id_map );
+
+	// check if the map exists
+	if( $result_map == NULL ) return '<strong>Error in shortcode!</strong>';
 
 	// unserialize points
 	$unserialize_points = maybe_unserialize( $result_map->points );	
@@ -72,7 +75,15 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 	function mxmpotm_create_object_points( $map, $points ) {
 
 		// create html
-		$html = '<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>';
+		$html = '<div class="mx-map_desc">';
+
+		$html .= '<h3>' . $map->map_name . '</h3>';
+
+		$html .= '<p>' . $map->map_desc . '</p>';
+
+		$html .= '</div>';
+
+		$html .= '<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>';
 
 		// get filter
 		$html .= mxmpotm_filter_map( $map, $points  );
@@ -224,7 +235,7 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 
 				$html .= '<select name="mxmpotm_map_search_point" id="mxmpotm_map_search_point">';
 
-					$html .= '<option value="0" data-lat="' . $map->latitude_map_center . '" data-lng="' . $map->longitude_map_center . '" >' . __( 'All points:', 'mxmpotm-map' ) . '</option>';
+					$html .= '<option value="0" data-lat="' . $map->latitude_map_center . '" data-lng="' . $map->longitude_map_center . '" >' . __( 'All points', 'mxmpotm-map' ) . '</option>';
 					
 					foreach ( $points as $k => $v ) {
 

@@ -49,7 +49,7 @@
 .mx-form-group_first {
     margin-top: -20px;
 }
-.mx-form-group_first small:first-child {
+.mx-form-group_first > small:first-child {
     margin-left: 22px;
 }
 .mx-del_point {
@@ -57,8 +57,8 @@
     position: absolute;
     right: 0px;
     margin-top: 26px;
-    border: 1px solid #ddd;
-    color: #ddd;
+    border: 1px solid #34b3e6;
+    color: #34b3e6;
     background: transparent;
     cursor: pointer; 
 }
@@ -79,7 +79,7 @@
 .mxmpotm_point_wrap {
     position: relative;
     position: relative;
-    background: #f3f2f2;
+    background: rgba(1, 140, 187, 0.22);
     padding: 35px 28px 3px;
     margin-bottom: 12px;
     border-bottom: 1px solid #0085ba;
@@ -96,6 +96,7 @@
 .mxmpotm_point_wrap input,
 .mxmpotm_point_wrap textarea {
     margin-bottom: 20px;
+    border: 1px solid rgb(1, 140, 187);
 }
 input.mx_new_point_region {
     width: 353px;
@@ -107,7 +108,7 @@ button.mx-add_region {
     border: none;
     background: transparent;
     padding: 5px 9px;
-    color: #ddd;
+    color: #34b3e6;
     cursor: pointer;
     display: none;
 }
@@ -122,10 +123,10 @@ button.mx-add_point {
     position: absolute;
     bottom: 0px;
     right: -32px;
-    border: 1px solid #ddd;
+    border: 1px solid #34b3e6;
     background: transparent;
     padding: 5px 9px;
-    color: #ddd;
+    color: #34b3e6;
     cursor: pointer;
     display: none;
 }
@@ -136,10 +137,10 @@ button.mx-open_point_box {
     position: absolute;
     top: 0px;
     right: 0px;
-    border: 1px solid #ddd;
+    border: 1px solid #34b3e6;
     background: transparent;
     padding: 5px 9px;
-    color: #ddd;
+    color: #34b3e6;
     cursor: pointer;
 }
 .mxmpotm_point_wrap_open {

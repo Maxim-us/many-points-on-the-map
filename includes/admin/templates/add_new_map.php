@@ -16,12 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<input type="hidden" id="current_page_url" name="current_page_url" value="" />
 
 		<div class="form-group">
-			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" class="form-control" id="mx_name_of_the_map" name="mx_name_of_the_map" value="" required />	
 		</div>
 
 		<div class="form-group">
-			<label for="mx_desc_of_the_map"><?php echo __( 'Map description', 'mxmpotm-map' ); ?></label>
+			<label for="mx_desc_of_the_map"><?php echo __( 'Map description:', 'mxmpotm-map' ); ?></label>
 			<textarea name="mx_desc_of_the_map" id="mx_desc_of_the_map"></textarea>
 		</div>			
 
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Coordinates of the map:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Coordinates of the map', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 
@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Scaling a map:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Scaling a map', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 			
@@ -89,11 +89,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 		<div class="form-group">
 
-			<h6><?php echo __( 'Map size:', 'mxmpotm-map' ); ?></h6>
+			<h6><?php echo __( 'Map size', 'mxmpotm-map' ); ?></h6>
 			
 			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
 
-			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100% or 700px', 'mxmpotm-map' ); ?>" value="100%" required />
+			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 700px or 100%', 'mxmpotm-map' ); ?>" value="100%" required />
 
 		</div>
 
@@ -109,7 +109,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Filters:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Filters', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 

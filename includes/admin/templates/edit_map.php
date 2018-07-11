@@ -36,12 +36,12 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 		<input type="hidden" id="current_page_url" name="current_page_url" value="<?php echo $current_page_url; ?>" />
 
 		<div class="form-group">
-			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_name_of_the_map"><?php echo __( 'The name of the map:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" class="form-control" id="mx_name_of_the_map" name="mx_name_of_the_map" value="<?php echo $map_rows->map_name; ?>" required />	
 		</div>
 
 		<div class="form-group">
-			<label for="mx_desc_of_the_map"><?php echo __( 'Map description', 'mxmpotm-map' ); ?></label>
+			<label for="mx_desc_of_the_map"><?php echo __( 'Map description:', 'mxmpotm-map' ); ?></label>
 			<textarea name="mx_desc_of_the_map" id="mx_desc_of_the_map"><?php echo $map_rows->map_desc; ?></textarea>
 		</div>			
 
@@ -49,18 +49,18 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Coordinates of the map:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Coordinates of the map', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 
-			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_latitude_map_center"><?php echo __( 'Latitude Map Center:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" name="mx_latitude_map_center" class="form-control mx-is_coordinates" id="mx_latitude_map_center" placeholder="<?php echo __( 'For example: 50.428545', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->latitude_map_center; ?>" required />
 
 		</div>
 
 		<div class="form-group">
 			
-			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
+			<label for="mx_longitude_map_center"><?php echo __( 'Longitude Map Center:', 'mxmpotm-map' ); ?> <span class="text-danger">*</span></label>
 			<input type="text" name="mx_longitude_map_center" class="form-control mx-is_coordinates" id="mx_longitude_map_center" placeholder="<?php echo __( 'For example: 30.689375', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->longitude_map_center; ?>" required />
 
 		</div>
@@ -69,7 +69,7 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Scaling a map:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Scaling a map', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 			
@@ -107,13 +107,13 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Map size:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Map size', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">			
 			
 			<label for="mx_size_map_width"><?php echo __( 'Width:', 'mxmpotm-map' ); ?></label>
 
-			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 100%', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_width; ?>" required />
+			<input type="text" name="mx_size_map_width" class="form-control" id="mx_size_map_width" placeholder="<?php echo __( 'For example: 700px or 100%', 'mxmpotm-map' ); ?>" value="<?php echo $map_rows->map_width; ?>" required />
 
 		</div>
 
@@ -129,7 +129,7 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 	<div class="mx-block_wrap">
 
-		<h5><?php echo __( 'Filters:', 'mxmpotm-map' ); ?></h5>
+		<h5><?php echo __( 'Filters', 'mxmpotm-map' ); ?></h5>
 
 		<div class="form-group">
 
@@ -165,34 +165,34 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 					
 				<div class="form-group mx-form-group_first">
 
-					<small class="form-text text-muted"><?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *</small>
+					<small class="form-text text-dark"><?php echo __( 'Set point name', 'mxmpotm-map' ); ?> *</small>
 					<input type="text" class="mx_new_point_name form-control mx-is_required" name="mx_new_point_name" placeholder="" value="<?php echo $point['point_name']; ?>" />
 
-					<small class="form-text text-muted"><?php echo __( 'Describe the point', 'mxmpotm-map' ); ?></small>
+					<small class="form-text text-dark"><?php echo __( 'Describe the point', 'mxmpotm-map' ); ?></small>
 					<textarea name="mx_new_point_desc" class="mx_new_point_desc form-control" placeholder=""><?php echo $point['point_desc']; ?></textarea>
 
 					<div>
 						
-						<small class="form-text text-muted"><?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *</small>
+						<small class="form-text text-dark"><?php echo __( 'Latitude', 'mxmpotm-map' ); ?> *</small>
 						<input type="text" name="mx_new_point_latitude" class="mx_new_point_latitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'For example: 50.456608', 'mxmpotm-map' ); ?>" value="<?php echo $point['point_latitude']; ?>" />
 
-						<small class="form-text text-muted"><?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *</small>
+						<small class="form-text text-dark"><?php echo __( 'Longitude', 'mxmpotm-map' ); ?> *</small>
 						<input type="text" name="mx_new_point_longitude" class="mx_new_point_longitude form-control mx-is_required mx-is_coordinates"  placeholder="<?php echo __( 'For example: 30.343306', 'mxmpotm-map' ); ?>" value="<?php echo $point['point_longitude']; ?>" />
 
 					</div>
 
-					<small class="form-text text-muted"><?php echo __( 'Address', 'mxmpotm-map' ); ?> *</small>
+					<small class="form-text text-dark"><?php echo __( 'Address', 'mxmpotm-map' ); ?> *</small>
 					<input type="text" name="mx_new_point_address" class="mx_new_point_address form-control mx-is_required" placeholder="" value="<?php echo $point['point_address']; ?>" />
 
 					<!-- web site -->
-					<small class="form-text text-muted"><?php echo __( 'WebSite', 'mxmpotm-map' ); ?></small>
+					<small class="form-text text-dark"><?php echo __( 'WebSite', 'mxmpotm-map' ); ?></small>
 					<input type="text" name="mx_new_point_web_site" class="mx_new_point_web_site form-control" placeholder="" value="<?php echo $point['web_site']; ?>" />
 
 					<!-- phone -->
-					<small class="form-text text-muted"><?php echo __( 'Phone', 'mxmpotm-map' ); ?></small>
+					<small class="form-text text-dark"><?php echo __( 'Phone', 'mxmpotm-map' ); ?></small>
 					<input type="text" name="mx_new_point_phone" class="mx_new_point_phone form-control" placeholder="" value="<?php echo $point['phone']; ?>" />
 
-					<small class="form-text text-muted"><?php echo __( 'Additional information', 'mxmpotm-map' ); ?></small>
+					<small class="form-text text-dark"><?php echo __( 'Additional information', 'mxmpotm-map' ); ?></small>
 					<textarea name="mx_new_point_additional" class="mx_new_point_additional form-control" placeholder=""><?php echo $point['point_additional']; ?></textarea>
 				
 					<!-- regions -->
