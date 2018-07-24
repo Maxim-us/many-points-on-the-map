@@ -234,11 +234,11 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 	var zoom_map_to_point 	= $( '#mx_default_zoon_to_point' ).val();
 
-	var map_width 	= $( '#mx_size_map_width' ).val();
+	var map_width 			= $( '#mx_size_map_width' ).val();
 
-	var map_height 	= $( '#mx_size_map_height' ).val();
+	var map_height 			= $( '#mx_size_map_height' ).val();
 
-	var filter_regions = 0;
+	var filter_regions 		= 0;
 
 	if( $( '#mx_show_region_filter' ).prop( 'checked' ) ) {
 
@@ -333,7 +333,15 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 				alert( dataSavedText );
 
-				window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
+				if( action === 'mxmpotm_add_map' ) {
+
+					window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map';
+
+				} else {
+
+					window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map-edit&map=' + id_map;
+
+				}				
 
 			} else {
 

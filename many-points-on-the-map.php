@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Many points on the map
-Plugin URI: https://github.com/Maxim-us/wp-plugin-skeleton
+Plugin URI: https://github.com/Maxim-us/many-points-on-the-map
 Description: The plugin helps you set points on the map and filter them in the future.
 Author: Marko Maksym
 Version: 1.0
-Author URI: https://github.com/Maxim-us)
+Author URI: https://github.com/Maxim-us
 */
 
 // Exit if accessed directly

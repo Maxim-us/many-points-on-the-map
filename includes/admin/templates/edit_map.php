@@ -11,9 +11,15 @@ $map_rows = mxmpotm_select_row( $map_id );
 // exit if the result is not found
 if( $map_rows == NULL ) {
 
-	wp_redirect( get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the-map' );
+	//wp_redirect( get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the-map' );
 
-	die();
+	$back_url = get_admin_url() . 'admin.php?page=mxmpotm-many-points-on-the-map';
+
+	?>
+		<script> window.location.href = '<?php echo $back_url; ?>'; </script>
+	<?php
+
+	die( '<a href="' . $back_url . '">Something wrong, come back</a>' );
 
 }
 

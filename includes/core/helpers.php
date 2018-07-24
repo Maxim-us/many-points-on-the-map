@@ -16,7 +16,7 @@ function mxmpotm_require_template_admin( $file ) {
 * Select data
 */
 // select row by id
-function mxmpotm_select_row( int $id ) {
+function mxmpotm_select_row( $id ) {
 
 	global $wpdb;
 
