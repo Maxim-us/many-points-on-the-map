@@ -27,7 +27,7 @@ final class MXMPOTMManyPointsOnTheMap
 		$this->mxmpotm_define( 'MXMPOTM_TABLE_SLUG', 'mxmpotm_map_points' );
 
 		// include php files
-		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_ABS_PATH', dirname( MXMPOTM_PLUGIN_PATH ) . '\\' );
+		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_ABS_PATH', dirname( MXMPOTM_PLUGIN_PATH ) . '/' );
 
 		// version
 		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_VERSION', '1.0' );
@@ -41,16 +41,16 @@ final class MXMPOTMManyPointsOnTheMap
 	{
 
 		// Basis functions
-		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\class-basis-plugin-class.php';
+		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/class-basis-plugin-class.php';
 
 		// Helpers
-		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\core\helpers.php';
+		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/core/helpers.php';
 
 		// Part of the Frontend
-		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\frontend\class-frontend-main.php';
+		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/frontend/class-frontend-main.php';
 
 		// Part of the Administrator
-		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\admin\class-admin-main.php';
+		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/admin/class-admin-main.php';
 
 	}
 

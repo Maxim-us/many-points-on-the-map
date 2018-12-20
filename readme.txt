@@ -2,8 +2,8 @@
 Contributors: markomaksym
 Tags: yandex maps, map
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 1.0
+Tested up to: 5.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,3 +44,6 @@ You can put a map on your website using a shortcode.
 
 = 1.0 =
 * Many points on the map
+
+= 1.0.1 =
+* Fixed path error

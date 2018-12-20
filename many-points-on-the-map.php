@@ -4,7 +4,7 @@ Plugin Name: Many points on the map
 Plugin URI: https://github.com/Maxim-us/many-points-on-the-map
 Description: The plugin helps you set points on the map and filter them in the future.
 Author: Marko Maksym
-Version: 1.0
+Version: 1.0.1
 Author URI: https://github.com/Maxim-us
 */
 

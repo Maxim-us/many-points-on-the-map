@@ -27,7 +27,7 @@ class MXMPOTMAdminMain
 	{
 
 		// require database-talk class
-		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\admin\class-database-talk.php';
+		require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/admin/class-database-talk.php';
 
 	}
 

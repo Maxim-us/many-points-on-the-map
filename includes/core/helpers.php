@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 */
 function mxmpotm_require_template_admin( $file ) {
 
-	require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes\admin\templates\\' . $file;
+	require_once MXMPOTM_PLUGIN_ABS_PATH . 'includes/admin/templates/' . $file;
 
 }
 
