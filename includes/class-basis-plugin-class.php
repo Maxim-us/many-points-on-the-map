@@ -13,7 +13,7 @@ class MXMPOTMBasisPluginClass
 	{
 
 		// set option for rewrite rules CPT
-		self::create_option_for_activation();
+		// self::create_option_for_activation();
 
 		// Create table
 		global $wpdb;

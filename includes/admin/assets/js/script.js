@@ -329,6 +329,8 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 		jQuery.post( ajaxurl, data, function( response ) {	
 
+			console.log( response );
+
 			if( response === '' ) {
 
 				alert( dataSavedText );
@@ -369,6 +371,8 @@ function mxmpotm_delete_map( $, nonce, id_map ) {
 	if( confirm( confirmTextdelMap ) ) {
 
 		jQuery.post( ajaxurl, data, function( response ) {
+
+			console.log( response );
 
 			window.location.href = 'admin.php?page=mxmpotm-many-points-on-the-map';
 

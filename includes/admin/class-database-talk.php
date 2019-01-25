@@ -55,7 +55,7 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Add data
-		public function add_new_map( $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height )
+		public function add_new_map( $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, $zoom_map_center, $zoom_map_to_point, $map_width, $map_height )
 		{
 
 			// name of the map
@@ -207,7 +207,7 @@ class MXMPOTMDataBaseTalk
 	}
 
 		// Update map
-		public function update_map( int $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, int $zoom_map_center, int $zoom_map_to_point, $map_width, $map_height, int $filter_regions )
+		public function update_map( $id_map, $map_name, $map_desc, $obj_points, $latitude_center, $longitude_center, $zoom_map_center, $zoom_map_to_point, $map_width, $map_height, $filter_regions )
 		{
 
 			// name of the map
