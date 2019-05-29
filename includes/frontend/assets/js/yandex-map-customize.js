@@ -3,15 +3,17 @@ var myMap;
 // initialize function
 function init() {
 
-    myMap = new ymaps.Map( 'map', {
+    myMap = new ymaps.Map( 'mxmpotm_map', {
 
         center: [centerMapLatDefault, centerMapLngDefault],
 
         zoom: zoomMapDefault,
 
-        controls: ['zoomControl','rulerControl']
+        controls: ['zoomControl','rulerControl']        
 
     } );
+
+    console.log( myMap.geoObjects );
 
     var objectManager = new ymaps.ObjectManager( {
 
@@ -225,7 +227,9 @@ function mxmpotm_select_default_option( $, elementSelect ) {
 // init
 window.onload = function() {
     ymaps.ready(function () {
+
         init();
+
     });
 }    
 

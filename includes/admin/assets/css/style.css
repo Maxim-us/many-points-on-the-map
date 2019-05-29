@@ -170,3 +170,27 @@ button.mx-delete_region:hover {
 .mx-block_wrap.is-invalid {
     border-color: #dc3545;
 }
+.mxmpotm_add_custom_marker {
+    cursor: pointer;
+}
+.mxmpotm_custom_marker_wrap {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    align-items: center;
+}
+.mxmpotm_custom_marker_reset_marker {
+    position: absolute;
+    margin-top: -18px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border: 1px solid rgb(1, 140, 187);
+    color: rgb(1, 140, 187);
+    cursor: pointer;
+}
+.mxmpotm_custom_marker_reset_marker:hover {
+    background-color: #fff;
+}

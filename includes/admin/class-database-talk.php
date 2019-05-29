@@ -31,6 +31,9 @@ class MXMPOTMDataBaseTalk
 		// delete map
 		add_action( 'wp_ajax_mxmpotm_del_map', array( $this, 'prepare_del_map' ) );
 
+		// custom marker notification
+		add_action( 'wp_ajax_mxmpotm_confirm_notification', array( $this, 'mxmpotm_confirm_notification' ) );
+
 	}
 
 	/*
@@ -116,21 +119,27 @@ class MXMPOTMDataBaseTalk
 
 					$tmp_array['phone'] = $phone;
 
-					// areas
-					$tmp_all_areas = array();
+				// custom marker
+				$point_custom_marker = sanitize_text_field( $value['point_custom_marker'] );
 
-					foreach ( $value['areas'] as $key => $value ) {
-						
-						// point_desc
-						$area = sanitize_text_field( $value );
+					$tmp_array['point_custom_marker'] = $point_custom_marker;
 
-							$push_area = array_push( $tmp_all_areas, $area );
+				// areas
+				$tmp_all_areas = array();
 
-					}
+				foreach ( $value['areas'] as $key => $_value ) {
+					
+					// point_desc
+					$area = sanitize_text_field( $_value );
 
-					$tmp_array['areas'] = $tmp_all_areas;
+						$push_area = array_push( $tmp_all_areas, $area );
 
-					$push_to_main_array = array_push( $sanitize_points, $tmp_array );
+				}
+
+				$tmp_array['areas'] = $tmp_all_areas;
+
+				// push to main array
+				$push_to_main_array = array_push( $sanitize_points, $tmp_array );
 
 			}
 
@@ -268,21 +277,27 @@ class MXMPOTMDataBaseTalk
 
 					$tmp_array['phone'] = $phone;
 
-					// areas
-					$tmp_all_areas = array();
+				// custom marker
+				$point_custom_marker = sanitize_text_field( $value['point_custom_marker'] );
 
-					foreach ( $value['areas'] as $key => $value ) {
-						
-						// point_desc
-						$area = sanitize_text_field( $value );
+					$tmp_array['point_custom_marker'] = $point_custom_marker;
 
-							$push_area = array_push( $tmp_all_areas, $area );
+				// areas
+				$tmp_all_areas = array();
 
-					}
+				foreach ( $value['areas'] as $key => $_value ) {
+					
+					// point_desc
+					$area = sanitize_text_field( $_value );
 
-					$tmp_array['areas'] = $tmp_all_areas;
+						$push_area = array_push( $tmp_all_areas, $area );
 
-					$push_to_main_array = array_push( $sanitize_points, $tmp_array );
+				}
+
+				$tmp_array['areas'] = $tmp_all_areas;				
+
+				// push to main array
+				$push_to_main_array = array_push( $sanitize_points, $tmp_array );
 
 			}
 
@@ -378,6 +393,24 @@ class MXMPOTMDataBaseTalk
 			);
 
 		}
+
+	/* custom marker notification */
+	public function mxmpotm_confirm_notification()
+	{
+
+		// Checked POST nonce is not empty
+		if( empty( $_POST['nonce'] ) ) wp_die( '0' );
+
+		// Checked or nonce match
+		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_admin_nonce' ) ){
+
+			add_option( '_mxmpotm_custom_markup_notice', 'was_seen' );
+
+		}
+
+		wp_die();
+
+	}
 
 }
 

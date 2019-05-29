@@ -70,8 +70,22 @@ class MXMPOTMAdminMain
 			// include admin_style file
 			wp_enqueue_style( 'mxmpotm_admin_style', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/css/style.css', array( 'mxmpotm_font_awesome' ), MXMPOTM_PLUGIN_VERSION, 'all' );
 
+			wp_enqueue_media();
+
 			// include admin_script file
 			wp_enqueue_script( 'mxmpotm_admin_script', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, true );
+
+			// include custom file
+			wp_enqueue_script( 'mxmpotm_admin_script_custom', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/custom.js', array( 'jquery', 'mxmpotm_admin_script' ), MXMPOTM_PLUGIN_VERSION, true );
+
+			// localize object
+			wp_localize_script( 'mxmpotm_admin_script', 'mxmpotm_localize_script_obj', array(
+
+				'default_marker_src' 	=> MXMPOTM_PLUGIN_URL . '/includes/admin/assets/img/default_icon.png',
+
+				'mxmpotm_nonce' 		=> wp_create_nonce( 'mxmpotm_admin_nonce' )
+
+			) );	
 
 		}
 
@@ -125,6 +139,38 @@ class MXMPOTMAdminMain
 
 		}
 
+	// notifications
+	public function mxmpotm_notifications()
+	{
+
+		if( is_admin() && get_option( '_mxmpotm_custom_markup_notice' ) !== 'was_seen' ) {
+			
+			add_action( 'admin_notices', array( $this, 'mxmpotm_custom_markup_notice' ) );		
+		}
+
+	}
+
+		// marker notification
+		public function mxmpotm_custom_markup_notice()
+		{
+
+			?>
+	    	<div class="notice notice-success mxmpotm_notification_marker">
+		        <h5><b>"Many points on the map" plugin:</b></h5>
+		        <p><?php echo __( 'Now you can set up your own custom marker for any point.', 'mxmpotm-map' ); ?></p>
+
+		        <p>
+		        	<a href="<?php get_admin_url(); ?>admin.php?page=mxmpotm-many-points-on-the-map"><?php echo __( 'Go to the map list', 'mxmpotm-map' ); ?></a>
+		        </p>
+
+		        <p>
+		        	<button class="button button-primary button-large">OK!</button>
+		        </p>
+		    </div>
+		    <?php
+
+		}
+
 }
 
 // Initialize
@@ -132,3 +178,6 @@ $initialize_class = new MXMPOTMAdminMain();
 
 // Apply scripts and styles
 $initialize_class->mxmpotm_register();
+
+// apply notifications
+$initialize_class->mxmpotm_notifications();

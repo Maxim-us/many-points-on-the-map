@@ -57,6 +57,20 @@
 			
 		</div>
 
+		<!-- custom marker -->
+		<div class="mxmpotm_custom_marker_wrap">
+			
+			<img src="<?php echo MXMPOTM_PLUGIN_URL . '/includes/admin/assets/img/default_icon.png'; ?>" alt="" width="50" height="50" class="mxmpotm_add_custom_marker" data-default-marker="0" title="<?php echo __( 'Add Custom Marker', 'mxmpotm-map' ); ?>" />
+			<div>
+				<p><?php echo __( 'You can add your own custom marker. (e.g 50x50 px.)', 'mxmpotm-map' ); ?></p>
+			</div>
+
+			<div class="mxmpotm_custom_marker_reset_marker" style="display: none;" title="<?php echo __( 'Reset Marker', 'mxmpotm-map' ); ?>">
+				<i class="fa fa-close"></i>
+			</div>
+			
+		</div>
+
 	</div>
 
 </div>

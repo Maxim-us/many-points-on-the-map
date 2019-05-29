@@ -228,7 +228,41 @@ $unserialize_points = maybe_unserialize( $map_rows->points );
 
 						<?php endif; ?>
 						
-					</div>					
+					</div>
+
+					<!-- custom marker -->
+					<div class="mxmpotm_custom_marker_wrap">
+
+						<?php
+
+							$mxmpotm_image_src = MXMPOTM_PLUGIN_URL . '/includes/admin/assets/img/default_icon.png';
+
+							$data_default_marker = 0;
+
+							$reset_button = 'style="display: none;"';
+
+							if( strlen( $point['point_custom_marker'] ) > 4 ) {
+
+								$mxmpotm_image_src = $point['point_custom_marker'];
+
+								$data_default_marker = 1;
+
+								$reset_button = '';
+
+							}
+
+						?>
+
+						<img src="<?php echo $mxmpotm_image_src; ?>" alt="" width="50" height="50" class="mxmpotm_add_custom_marker" data-default-marker="<?php echo $data_default_marker; ?>" title="<?php echo __( 'Add Custom Marker', 'mxmpotm-map' ); ?>" />
+						<div>
+							<p><?php echo __( 'You can add your own custom marker. (e.g 50x50 px.)', 'mxmpotm-map' ); ?></p>
+						</div>
+
+						<div class="mxmpotm_custom_marker_reset_marker" <?php echo $reset_button; ?> title="<?php echo __( 'Reset Marker', 'mxmpotm-map' ); ?>">
+							<i class="fa fa-close"></i>
+						</div>
+											
+					</div>
 
 				</div>
 

@@ -1,5 +1,11 @@
 jQuery( document ).ready( function( $ ) {
 
+	// init 
+	mxmpotm_add_custom_marker_script( $ );
+
+	// reset marker
+	mxmpotm_custom_marker_reset_marker_script( $ );
+
 	// button delete point
 	check_count_points_and_hidden_del_button( $ );
 
@@ -281,6 +287,18 @@ function mxmpotm_ajax_data( $, _this, action ) {
 
 		// push additional into tmp obj
 		obj_point_tmp['point_additional'] = $( this ).find( '.mx_new_point_additional' ).val();
+
+		// custom marker
+			// if there is need to update
+			if( parseInt( $( this ).find( '.mxmpotm_add_custom_marker' ).attr( 'data-default-marker' ) ) === 1 ) {
+
+				obj_point_tmp['point_custom_marker'] = $( this ).find( '.mxmpotm_add_custom_marker' ).attr( 'src' );
+
+			} else {
+
+				obj_point_tmp['point_custom_marker'] = 0;
+
+			}
 
 		// areas
 		$( this ).find( '.mxmpotm_point_area_wrap' ).find( '.mx_new_point_region' ).each( function() {
@@ -593,4 +611,50 @@ function check_count_points_and_hidden_del_button( $ ) {
 
 	},1000 );	
 
+}
+
+// Add Custom Marker
+function mxmpotm_add_custom_marker_script( $ ) {
+
+	$( '#mxmpotm_points_wrap' ).on( 'click', '.mxmpotm_add_custom_marker', function() {
+
+		var _this = $( this );
+
+        var upload = wp.media( {
+
+	        title: 'Choose Image',
+
+	        multiple: false
+
+        } ).on( 'select', function(){
+
+            var select = upload.state().get('selection');
+
+            var attach = select.first().toJSON();
+
+            _this.attr( 'src', attach.url );
+
+            _this.attr( 'data-default-marker', 1 );
+
+            _this.parent().find( '.mxmpotm_custom_marker_reset_marker' ).show();
+
+        } ).open();
+
+	} );
+
+}
+
+// reset marker
+function mxmpotm_custom_marker_reset_marker_script( $ ) {
+
+	$( '#mxmpotm_points_wrap' ).on( 'click', '.mxmpotm_custom_marker_reset_marker', function() {
+
+		$( this ).parent().find( '.mxmpotm_add_custom_marker' ).attr( 'src', mxmpotm_localize_script_obj.default_marker_src );
+
+		$( this ).parent().find( '.mxmpotm_add_custom_marker' ).attr( 'data-default-marker', 0 );
+
+		$( this ).hide();
+
+	} );
+	
 }

@@ -88,7 +88,7 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 		// get filter
 		$html .= mxmpotm_filter_map( $map, $points  );
 
-		$html .= '<div id="map" style="width: ' . $map->map_width . '; height: ' . $map->map_height . '"></div>';
+		$html .= '<div id="mxmpotm_map" style="width: ' . $map->map_width . '; height: ' . $map->map_height . '"></div>';
 
 		$html .= '<script> var points = [';
 
@@ -102,7 +102,19 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 
 					$html .= '"mx_object": {"areas": ["' . implode( "\",\"", $value['areas'] ) . '"]},';
 
-					$html .= '"options": {"iconLayout": "default#image"},';
+					$html .= '"options": {';
+
+						$html .= 'iconLayout: "default#image",';
+
+						if( strlen( $value['point_custom_marker'] ) > 4 ) {
+
+							$html .= 'iconImageHref: "' . $value['point_custom_marker'] . '",';
+
+							$html .= 'iconImageSize: [42, 42]';
+						
+						}						
+
+					$html .= '},';
 
 					$html .= '"properties": {"balloonContent": `' . mxmpotm_show_content( $value['point_id'], $value['point_name'], $value['point_address'], $value['phone'], $value['web_site'], $value['areas'], $value['point_desc'], $value['point_additional'] ) . '`}},';
 
