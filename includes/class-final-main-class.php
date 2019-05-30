@@ -30,7 +30,7 @@ final class MXMPOTMManyPointsOnTheMap
 		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_ABS_PATH', dirname( MXMPOTM_PLUGIN_PATH ) . '/' );
 
 		// version
-		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_VERSION', time() ); //'1.0.2'
+		$this->mxmpotm_define( 'MXMPOTM_PLUGIN_VERSION', '1.3.1' );// '1.3'
 
 	}
 

@@ -13,8 +13,6 @@ function init() {
 
     } );
 
-    console.log( myMap.geoObjects );
-
     var objectManager = new ymaps.ObjectManager( {
 
         clusterize: true,
@@ -200,6 +198,9 @@ function mxmpotm_create_array_of_areas( $, allPoints ) {
 // create search area options
 function mxmpotm_create_search_area_options( $, idElement, areas ) {
 
+    // sort by alphabet order
+    mxmpotm_areas_sortable_array( areas );
+
     $( idElement ).append( '<option value="all">' + allAreasText + '</option>' );
 
     areas.map( function( area, index ){
@@ -209,6 +210,24 @@ function mxmpotm_create_search_area_options( $, idElement, areas ) {
     } );
    
 }
+
+    function mxmpotm_areas_sortable_array( areas ) {
+
+        areas.sort(
+
+            function( a, b ){
+
+                if(a.areaName < b.areaName) { return -1; }
+
+                if(a.areaName > b.areaName) { return 1; }
+
+                return 0;
+
+            }
+
+        );
+
+    }
 
 function mxmpotm_select_default_option( $, elementSelect ) {
 

@@ -3,7 +3,7 @@ Contributors: markomaksym
 Tags: yandex maps, map
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.2
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,14 +42,20 @@ You can put a map on your website using a shortcode.
 
 == Changelog ==
 
-= 1.0 =
-* Many points on the map
+= 1.3.1 =
+* Fixed notification bug
 
-= 1.0.1 =
-* Fixed path error
+= 1.3 =
+* Sorting of points and regions alphabetically
+
+= 1.2 =
+* Many points on the map: Custom Markers
 
 = 1.0.2 =
 * Fixed type of arguments error
 
-= 1.2 =
-* Many points on the map: Custom Markers
+= 1.0.1 =
+* Fixed path error
+
+= 1.0 =
+* Many points on the map

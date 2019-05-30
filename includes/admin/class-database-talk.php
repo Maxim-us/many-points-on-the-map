@@ -34,6 +34,9 @@ class MXMPOTMDataBaseTalk
 		// custom marker notification
 		add_action( 'wp_ajax_mxmpotm_confirm_notification', array( $this, 'mxmpotm_confirm_notification' ) );
 
+		// points sort notification
+		add_action( 'wp_ajax_mxmpotm_alphabet_order', array( $this, 'mxmpotm_alphabet_order' ) );
+
 	}
 
 	/*
@@ -405,6 +408,24 @@ class MXMPOTMDataBaseTalk
 		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_admin_nonce' ) ){
 
 			add_option( '_mxmpotm_custom_markup_notice', 'was_seen' );
+
+		}
+
+		wp_die();
+
+	}
+
+	/* sort of points notification */
+	public function mxmpotm_alphabet_order()
+	{
+
+		// Checked POST nonce is not empty
+		if( empty( $_POST['nonce'] ) ) wp_die( '0' );
+
+		// Checked or nonce match
+		if( wp_verify_nonce( $_POST['nonce'], 'mxmpotm_admin_nonce' ) ){
+
+			add_option( '_mxmpotm_alphabet_order_notice', 'was_seen' );
 
 		}
 

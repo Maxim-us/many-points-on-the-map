@@ -51,6 +51,16 @@ class MXMPOTMAdminMain
 		public function mxmpotm_enqueue()
 		{
 
+			// include custom file
+			wp_enqueue_script( 'mxmpotm_admin_script_custom', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/custom.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, true );
+
+			// localize object
+			wp_localize_script( 'mxmpotm_admin_script_custom', 'mxmpotm_localize_script_custom_obj', array(
+
+				'mxmpotm_nonce' 		=> wp_create_nonce( 'mxmpotm_admin_nonce' )
+
+			) );	
+
 			if( ! isset( $_GET['page'] ) ) return;
 
 			// include bootstrap 4.1.1
@@ -73,13 +83,10 @@ class MXMPOTMAdminMain
 			wp_enqueue_media();
 
 			// include admin_script file
-			wp_enqueue_script( 'mxmpotm_admin_script', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, true );
-
-			// include custom file
-			wp_enqueue_script( 'mxmpotm_admin_script_custom', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/custom.js', array( 'jquery', 'mxmpotm_admin_script' ), MXMPOTM_PLUGIN_VERSION, true );
+			wp_enqueue_script( 'mxmpotm_admin_script', MXMPOTM_PLUGIN_URL . 'includes/admin/assets/js/script.js', array( 'jquery' ), MXMPOTM_PLUGIN_VERSION, true );			
 
 			// localize object
-			wp_localize_script( 'mxmpotm_admin_script', 'mxmpotm_localize_script_obj', array(
+			wp_localize_script( 'jquery', 'mxmpotm_localize_script_obj', array(
 
 				'default_marker_src' 	=> MXMPOTM_PLUGIN_URL . '/includes/admin/assets/img/default_icon.png',
 
@@ -143,9 +150,16 @@ class MXMPOTMAdminMain
 	public function mxmpotm_notifications()
 	{
 
+		// marker notice
 		if( is_admin() && get_option( '_mxmpotm_custom_markup_notice' ) !== 'was_seen' ) {
 			
-			add_action( 'admin_notices', array( $this, 'mxmpotm_custom_markup_notice' ) );		
+			add_action( 'admin_notices', array( $this, 'mxmpotm_custom_markup_notice' ) );
+		}
+
+		// alphabet order notice
+		if( is_admin() && get_option( '_mxmpotm_alphabet_order_notice' ) !== 'was_seen' ) {
+			
+			add_action( 'admin_notices', array( $this, 'mxmpotm_alphabet_order_notice' ) );
 		}
 
 	}
@@ -158,6 +172,27 @@ class MXMPOTMAdminMain
 	    	<div class="notice notice-success mxmpotm_notification_marker">
 		        <h5><b>"Many points on the map" plugin:</b></h5>
 		        <p><?php echo __( 'Now you can set up your own custom marker for any point.', 'mxmpotm-map' ); ?></p>
+
+		        <p>
+		        	<a href="<?php get_admin_url(); ?>admin.php?page=mxmpotm-many-points-on-the-map"><?php echo __( 'Go to the map list', 'mxmpotm-map' ); ?></a>
+		        </p>
+
+		        <p>
+		        	<button class="button button-primary button-large">OK!</button>
+		        </p>
+		    </div>
+		    <?php
+
+		}
+
+		// alphabet order notice
+		public function mxmpotm_alphabet_order_notice()
+		{
+
+			?>
+	    	<div class="notice notice-success mxmpotm_notification_alphabet_order">
+		        <h5><b>"Many points on the map" plugin:</b></h5>
+		        <p><?php echo __( 'Now the plugin has the ability to sort points and regions alphabetically.', 'mxmpotm-map' ); ?></p>
 
 		        <p>
 		        	<a href="<?php get_admin_url(); ?>admin.php?page=mxmpotm-many-points-on-the-map"><?php echo __( 'Go to the map list', 'mxmpotm-map' ); ?></a>

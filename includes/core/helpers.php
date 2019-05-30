@@ -59,10 +59,13 @@ function mxmpotm_show_many_points_map( $args ) {
 	if( $result_map == NULL ) return '<strong>Error in shortcode!</strong>';
 
 	// unserialize points
-	$unserialize_points = maybe_unserialize( $result_map->points );	
+	$unserialize_points = maybe_unserialize( $result_map->points );
+
+	// sortable
+	$array_result = mxmpotm_sort_array_by_alphabet_order( $unserialize_points );
 
 	// create js object for display data
-	return mxmpotm_create_object_points( $result_map, $unserialize_points );
+	return mxmpotm_create_object_points( $result_map, $array_result );
 
 }
 
@@ -296,5 +299,83 @@ add_shortcode( 'many_points_map', 'mxmpotm_show_many_points_map' );
 		$html .= '</script>';
 
 		return $html;
+
+	}
+
+// 
+function mxmpotm_sort_array_by_alphabet_order( $_array ) {
+
+	$new_array_of_names = array();
+
+	foreach ( $_array as $key => $value ) {
+
+		array_push( $new_array_of_names, $value["point_name"] );
+
+	}
+
+	// get names by alphabet order
+	$array_of_names_sorted = mxmpotm_sort_array_by_alphabet_order_recursion( $new_array_of_names, array() );
+
+	// create sortable array
+	$sortable_array = mxmpotm_crate_sortable_array( $_array, $array_of_names_sorted );
+
+	return $sortable_array;
+
+}
+	
+	// sort name value
+	function mxmpotm_sort_array_by_alphabet_order_recursion( $new_array_of_names, $new_array_of_names_sorted ) {
+
+		$new_array_of_names = $new_array_of_names;
+
+		$new_array_of_names_sorted = $new_array_of_names_sorted;		
+
+		if( count( $new_array_of_names ) > 0 ) {
+
+			// find minimal value
+			$min_value = min( $new_array_of_names );
+
+			array_push( $new_array_of_names_sorted, $min_value );
+
+			// remove minimal value from main array
+			foreach ( $new_array_of_names as $key => $value ) {
+				
+				if( $key = array_search( $min_value, $new_array_of_names ) ) {
+
+				    unset( $new_array_of_names[$key] );
+
+				    $new_array_of_names_sorted = mxmpotm_sort_array_by_alphabet_order_recursion( $new_array_of_names, $new_array_of_names_sorted );
+
+				}
+
+			}			
+
+		}		
+
+		return $new_array_of_names_sorted;
+
+	}
+
+	// crate sortable array
+	function mxmpotm_crate_sortable_array( $full_array, $name_ordered_array ) {
+
+		$sortable_array = array();
+
+		foreach ( $name_ordered_array as $key => $value ) {
+			
+			foreach ( $full_array as $_key => $_value ) {
+			
+				if( $value == $_value["point_name"] ) {
+
+					array_push( $sortable_array, $full_array[$_key] );
+
+				}
+			
+			}
+
+		}
+
+
+		return $sortable_array;
 
 	}
